@@ -21,10 +21,12 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.offset
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.imageResource
+import androidx.compose.ui.platform.LocalUriHandler
 
 @Composable
 fun HourlyWeatherForecastScreen(
@@ -63,35 +65,10 @@ fun HourlyWeatherForecastScreen(
                 .background(Color.White, shape = RoundedCornerShape(25.dp))
                 .padding(15.dp, 10.dp)
         ) {
-            Column(verticalArrangement = Arrangement.SpaceEvenly) {
-                Box(modifier = Modifier.height(50.dp).width(50.dp)){
-                    Image(
-                        bitmap = ImageBitmap.imageResource(R.drawable.cloudy),
-                        contentDescription = "облачно",
-                        contentScale = ContentScale.Fit
-                    )
-                }
-                Text(
-                    text = morning.toString() + " *C",
-                    color = Color.Black,
-                    fontSize = 25.sp
-                )
-            }
-            Text(
-                text = day.toString() + " *C",
-                color = Color.Black,
-                fontSize = 25.sp
-            )
-            Text(
-                text = evening.toString() + " *C",
-                color = Color.Black,
-                fontSize = 25.sp
-            )
-            Text(
-                text = night.toString() + " *C",
-                color = Color.Black,
-                fontSize = 25.sp
-            )
+            WeatherForTimeOfDay(R.drawable.cloudy,morning)
+            WeatherForTimeOfDay(R.drawable.snow,evening)
+            WeatherForTimeOfDay(R.drawable.sunny,day)
+            WeatherForTimeOfDay(R.drawable.lightrain,night)
         }
         Box(
             modifier = Modifier
@@ -135,6 +112,23 @@ fun HourlyWeatherForecastScreen(
                 )
             }
         }
-
+        val uriHandler = LocalUriHandler.current
+        Box(modifier = Modifier
+            .fillMaxWidth()
+            .height(250.dp)
+            .background(Color.White, shape = RoundedCornerShape(25.dp))
+            .padding(15.dp, 10.dp).clickable(onClick = {uriHandler.openUri("https://alfabank.ru/sme/raschetnyj-schet/")}),
+            contentAlignment = Alignment.BottomCenter){
+            Row(modifier = Modifier.offset(x = -70.dp,y = -190.dp)){
+                Text(text = "alfabank.ru", color = Color.Black,fontSize = 15.sp)
+                Text(text = "  Реклама",color = Color(161,162,167),fontSize = 15.sp)
+            }
+            Image(
+                bitmap = ImageBitmap.imageResource(R.drawable.advertising),
+                contentDescription = "реклама",
+                contentScale = ContentScale.FillWidth,
+                modifier = Modifier.fillMaxWidth(),
+            )
+        }
     }
 }

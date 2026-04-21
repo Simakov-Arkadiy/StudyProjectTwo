@@ -74,7 +74,7 @@ fun NavigationScreen() {
     NavHost(navController = navigateObject, startDestination = "WeatherForecastScreen") {
         composable("WeatherForecastScreen") {
 
-            WeatherForecastScreen(navigateObject)
+            WeatherForecastScreen(navigateObject,weathes)
         }
         composable(
             "HourlyWeatherForecastScreen/{morning}/{day}/{evening}/{night}", arguments = listOf(
