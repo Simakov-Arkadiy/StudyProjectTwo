@@ -18,35 +18,48 @@ import androidx.compose.foundation.clickable
 import androidx.navigation.NavHostController
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.stringResource
-
+import java.time.format.DateTimeFormatter
+import java.util.Date
 
 @Composable
-fun WeatherForecast(weather:WeatherForecastForDay,controller:NavHostController){
+internal fun DayTemperatureItem(
+    item: DayTemperature,
+    onClick: () -> Unit,
+) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier
             .fillMaxWidth()
             .height(70.dp)
-            .background(Color(54,67,112), shape = RoundedCornerShape(25.dp))
-            .padding(15.dp, 10.dp)
-            .clickable(onClick = {
-                controller.navigate(
-                    "HourlyWeatherForecastScreen/${weather.hourlyWeather.temperatureInTheMorning}/" +
-                            "${weather.hourlyWeather.temperatureInTheDay}/" +
-                            "${weather.hourlyWeather.temperatureInTheEvening}/" +
-                            "${weather.hourlyWeather.temperatureInTheNight}"
-                )
-            })
+            .background(Color(54, 67, 112), shape = RoundedCornerShape(25.dp))
+            .padding(16.dp, 10.dp)
+            .clickable { onClick.invoke() }
     ) {
+        // TODO: вынести цвета также
+        // TODO: написать свою экстеншен функцию для форматирования item.date (класс Date) в строчку для отображения
         Column {
-            Text(text = weather.data, color = Color(159,168,207), fontSize = 20.sp)
-            Text(text = stringResource(weather.dayOfTheWeek), color = Color.White, fontSize = 22.sp)
+            Text(
+                text = item.date.formatted(),
+                color = Color(159, 168, 207),
+                fontSize = 20.sp,
+            )
+            Text(
+                // TODO: еще экстеншен для форматирования
+                text = stringResource(weather.dayOfTheWeek),
+                color = Color.White,
+                fontSize = 22.sp,
+            )
         }
         Text(
-            text = "${weather.temperature}" + " *C",
+            text = "${item.averageTemperature} *C",
             color = Color.White,
             fontSize = 25.sp
         )
     }
+}
+
+private fun Date.formatted(): String {
+    //TODO: вот подсказка
+    //DateTimeFormatter
 }

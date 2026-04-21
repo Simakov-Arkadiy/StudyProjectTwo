@@ -31,6 +31,7 @@ import androidx.compose.ui.platform.LocalUriHandler
 @Composable
 fun HourlyWeatherForecastScreen(
     controller: NavHostController,
+    // TODO: заменить параметры на модельку details и убрать вопросики
     morning: Int?,
     day: Int?,
     evening: Int?,

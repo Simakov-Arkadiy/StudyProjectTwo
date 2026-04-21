@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.runtime.Composable
 
+// TODO: возможно актуализировать нейминг (чтобы не конфликтовал с нашими новыми неймингами)
 @Composable
 fun WeatherForTimeOfDay(imagId: Int, timeOfDay: Int?){
     Column(verticalArrangement = Arrangement.SpaceEvenly) {
