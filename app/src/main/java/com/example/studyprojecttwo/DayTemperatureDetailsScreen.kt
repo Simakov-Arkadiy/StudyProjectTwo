@@ -27,9 +27,11 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.platform.LocalUriHandler
+import com.example.studyprojecttwo.ui.theme.BackgroundColorForDayTemperatureDetailsScreen
+import com.example.studyprojecttwo.ui.theme.ColorForMinorText
 
 @Composable
-fun HourlyWeatherForecastScreen(
+internal fun DayTemperatureDetailsScreen(
     controller: NavHostController,
     morning: Int?,
     day: Int?,
@@ -37,13 +39,13 @@ fun HourlyWeatherForecastScreen(
     night: Int?
 ) {
     BackHandler {
-        controller.popBackStack()  // Возврат на предыдущий экран
+        controller.popBackStack()
     }
     Column(
         verticalArrangement = Arrangement.SpaceEvenly,
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(241, 242, 246))
+            .background(BackgroundColorForDayTemperatureDetailsScreen)
             .padding(10.dp)
     ) {
         Row(
@@ -65,10 +67,10 @@ fun HourlyWeatherForecastScreen(
                 .background(Color.White, shape = RoundedCornerShape(25.dp))
                 .padding(15.dp, 10.dp)
         ) {
-            WeatherForTimeOfDay(R.drawable.cloudy,morning)
-            WeatherForTimeOfDay(R.drawable.snow,evening)
-            WeatherForTimeOfDay(R.drawable.sunny,day)
-            WeatherForTimeOfDay(R.drawable.lightrain,night)
+            DayTemperatureDetailsItem(R.drawable.cloudy,morning)
+            DayTemperatureDetailsItem(R.drawable.snow,evening)
+            DayTemperatureDetailsItem(R.drawable.sunny,day)
+            DayTemperatureDetailsItem(R.drawable.lightrain,night)
         }
         Box(
             modifier = Modifier
@@ -121,7 +123,7 @@ fun HourlyWeatherForecastScreen(
             contentAlignment = Alignment.BottomCenter){
             Row(modifier = Modifier.offset(x = -70.dp,y = -190.dp)){
                 Text(text = "alfabank.ru", color = Color.Black,fontSize = 15.sp)
-                Text(text = "  Реклама",color = Color(161,162,167),fontSize = 15.sp)
+                Text(text = "  Реклама",color = ColorForMinorText,fontSize = 15.sp)
             }
             Image(
                 bitmap = ImageBitmap.imageResource(R.drawable.advertising),
