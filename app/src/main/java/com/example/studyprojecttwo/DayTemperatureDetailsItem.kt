@@ -17,7 +17,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.runtime.Composable
 
 @Composable
-fun WeatherForTimeOfDay(imagId: Int, timeOfDay: Int?){
+internal fun DayTemperatureDetailsItem(imagId: Int, averageDayTemperatureDetails: Int?){
     Column(verticalArrangement = Arrangement.SpaceEvenly) {
         Box(modifier = Modifier.height(50.dp).width(50.dp)){
             Image(
@@ -27,9 +27,9 @@ fun WeatherForTimeOfDay(imagId: Int, timeOfDay: Int?){
             )
         }
         Text(
-            text = timeOfDay.toString() + " *C",
+            text = "${averageDayTemperatureDetails.toString()}  *C",
             color = Color.Black,
-            fontSize = 25.sp
+            fontSize = 26.sp,
         )
     }
 }

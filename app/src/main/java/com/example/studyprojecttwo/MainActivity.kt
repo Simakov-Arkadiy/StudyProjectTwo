@@ -11,6 +11,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
+import java.util.Date
 
 
 class MainActivity : ComponentActivity() {
@@ -22,59 +23,60 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-var weathes: ArrayList<WeatherForecastForDay> = arrayListOf(
-    WeatherForecastForDay(
-        "16.04.2026", R.string.thursday , 8,
-        HourlyWeatherForecast(-2, 9, 6, -3)
+val nawDate = Date()
+internal var weathes: ArrayList<DayTemperature> = arrayListOf(
+    DayTemperature(
+       nawDate, 8,
+        DayTemperatureDetails(-2, 9, 6, -3)
     ),
-    WeatherForecastForDay(
-        "17.04.2026", R.string.friday, 11,
-        HourlyWeatherForecast(-1, 10, 7, -2)
+    DayTemperature(
+        Date(nawDate.time+24*60*60*1000L), 11,
+        DayTemperatureDetails(-1, 10, 7, -2)
     ),
-    WeatherForecastForDay(
-        "18.04.2026", R.string.saturday, 7,
-        HourlyWeatherForecast(-4, 7, 4, -5)
+    DayTemperature(
+        Date(nawDate.time+2*24*60*60*1000L), 7,
+        DayTemperatureDetails(-4, 7, 4, -5)
     ),
-    WeatherForecastForDay(
-        "19.04.2026", R.string.sunday, 9,
-        HourlyWeatherForecast(-1, 10, 7, -2)
+    DayTemperature(
+        Date(nawDate.time+3*24*60*60*1000L), 9,
+        DayTemperatureDetails(-1, 10, 7, -2)
     ),
-    WeatherForecastForDay(
-        "20.04.2026", R.string.monday, 12,
-        HourlyWeatherForecast(0, 11, 10, 1)
+    DayTemperature(
+        Date(nawDate.time+4*24*60*60*1000L), 12,
+        DayTemperatureDetails(0, 11, 10, 1)
     ),
-    WeatherForecastForDay(
-        "21.04.2026", R.string.tuesday, 13,
-        HourlyWeatherForecast(-2, 9, 6, -3)
+    DayTemperature(
+        Date(nawDate.time+5*24*60*60*1000L), 13,
+        DayTemperatureDetails(-2, 9, 6, -3)
     ),
-    WeatherForecastForDay(
-        "22.04.2026", R.string.wednesday, 10,
-        HourlyWeatherForecast(-2, 9, 6, -3)
+    DayTemperature(
+        Date(nawDate.time+6*24*60*60*1000L), 10,
+        DayTemperatureDetails(-2, 9, 6, -3)
     ),
-    WeatherForecastForDay(
-        "23.04.2026", R.string.thursday, 10,
-        HourlyWeatherForecast(-2, 9, 6, -3)
+    DayTemperature(
+        Date(nawDate.time+7*24*60*60*1000L), 10,
+        DayTemperatureDetails(-2, 9, 6, -3)
     ),
-    WeatherForecastForDay(
-        "24.04.2026", R.string.friday, 10,
-        HourlyWeatherForecast(-2, 9, 6, -3)
+    DayTemperature(
+        Date(nawDate.time+8*24*60*60*1000L), 10,
+        DayTemperatureDetails(-2, 9, 6, -3)
     ),
-    WeatherForecastForDay(
-        "25.04.2026", R.string.saturday, 10,
-        HourlyWeatherForecast(-2, 9, 6, -3)
+    DayTemperature(
+        Date(nawDate.time+9*24*60*60*1000L), 10,
+        DayTemperatureDetails(-2, 9, 6, -3)
     ),
-    WeatherForecastForDay(
-        "26.04.2026", R.string.sunday, 10,
-        HourlyWeatherForecast(-2, 9, 6, -3)
+    DayTemperature(
+        Date(nawDate.time+10*24*60*60*1000L), 10,
+        DayTemperatureDetails(-2, 9, 6, -3)
     )
 )
 @Composable
 fun NavigationScreen() {
     val navigateObject = rememberNavController()
-    NavHost(navController = navigateObject, startDestination = "WeatherForecastScreen") {
-        composable("WeatherForecastScreen") {
+    NavHost(navController = navigateObject, startDestination = "DayTemperatureListScreen") {
+        composable("DayTemperatureListScreen") {
 
-            WeatherForecastScreen(navigateObject,weathes)
+            DayTemperatureListScreen(navigateObject,weathes)
         }
         composable(
             "HourlyWeatherForecastScreen/{morning}/{day}/{evening}/{night}", arguments = listOf(
@@ -90,7 +92,7 @@ fun NavigationScreen() {
             val evening = entry.arguments?.getInt("evening")
             val night = entry.arguments?.getInt("night")
 
-            HourlyWeatherForecastScreen(navigateObject, morning, day, evening, night)
+            DayTemperatureDetailsScreen(navigateObject, morning, day, evening, night)
         }
     }
 }

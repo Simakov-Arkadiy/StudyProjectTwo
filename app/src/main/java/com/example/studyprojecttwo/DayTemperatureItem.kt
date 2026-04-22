@@ -17,36 +17,41 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.clickable
 import androidx.navigation.NavHostController
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.res.stringResource
+import com.example.studyprojecttwo.ui.theme.BackgroundColorForDayTemperatureItem
+import com.example.studyprojecttwo.ui.theme.ColorForMinorText
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 
 @Composable
-fun WeatherForecast(weather:WeatherForecastForDay,controller:NavHostController){
+internal fun DayTemperatureItem(item:DayTemperature, controller:NavHostController){
+    val formatter = SimpleDateFormat("dd.MM.yyyy",Locale.getDefault())
+    val formatterDayOfWeek = SimpleDateFormat("EEEE", Locale.getDefault())
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier
             .fillMaxWidth()
             .height(70.dp)
-            .background(Color(54,67,112), shape = RoundedCornerShape(25.dp))
-            .padding(15.dp, 10.dp)
+            .background(BackgroundColorForDayTemperatureItem, shape = RoundedCornerShape(26.dp))
+            .padding(16.dp, 10.dp)
             .clickable(onClick = {
                 controller.navigate(
-                    "HourlyWeatherForecastScreen/${weather.hourlyWeather.temperatureInTheMorning}/" +
-                            "${weather.hourlyWeather.temperatureInTheDay}/" +
-                            "${weather.hourlyWeather.temperatureInTheEvening}/" +
-                            "${weather.hourlyWeather.temperatureInTheNight}"
+                    "HourlyWeatherForecastScreen/${item.dayTemperatureDetails.averageTemperatureForMoning}/" +
+                            "${item.dayTemperatureDetails.averageTemperatureForDay}/" +
+                            "${item.dayTemperatureDetails.averageTemperatureForEvening}/" +
+                            "${item.dayTemperatureDetails.averageTemperatureForNight}"
                 )
             })
     ) {
         Column {
-            Text(text = weather.data, color = Color(159,168,207), fontSize = 20.sp)
-            Text(text = stringResource(weather.dayOfTheWeek), color = Color.White, fontSize = 22.sp)
+            Text(text = formatter.format(item.date), color = ColorForMinorText, fontSize = 20.sp)
+            Text(text = formatterDayOfWeek.format(item.date), color = Color.White, fontSize = 22.sp)
         }
         Text(
-            text = "${weather.temperature}" + " *C",
+            text = "${item.averageTemperature} *C",
             color = Color.White,
-            fontSize = 25.sp
+            fontSize = 26.sp
         )
     }
 }

@@ -9,3 +9,9 @@ val Pink80 = Color(0xFFEFB8C8)
 val Purple40 = Color(0xFF6650a4)
 val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
+
+val BackgroundColorForDayTemperatureDetailsScreen = Color(241, 242, 246)
+
+val ColorForMinorText = Color(161,162,167)
+
+val BackgroundColorForDayTemperatureItem = Color(54,67,112)
