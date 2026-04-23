@@ -33,10 +33,7 @@ import com.example.studyprojecttwo.ui.theme.ColorForMinorText
 @Composable
 internal fun DayTemperatureDetailsScreen(
     controller: NavHostController,
-    morning: Int?,
-    day: Int?,
-    evening: Int?,
-    night: Int?
+    model: DayTemperatureDetailsModel
 ) {
     BackHandler {
         controller.popBackStack()
@@ -67,10 +64,10 @@ internal fun DayTemperatureDetailsScreen(
                 .background(Color.White, shape = RoundedCornerShape(25.dp))
                 .padding(15.dp, 10.dp)
         ) {
-            DayTemperatureDetailsItem(R.drawable.cloudy,morning)
-            DayTemperatureDetailsItem(R.drawable.snow,evening)
-            DayTemperatureDetailsItem(R.drawable.sunny,day)
-            DayTemperatureDetailsItem(R.drawable.lightrain,night)
+            DayTemperatureDetailsItem(R.drawable.cloudy,model.GetaverageTemperatureForMorning())
+            DayTemperatureDetailsItem(R.drawable.snow,model.GetAverageTemperatureForDay())
+            DayTemperatureDetailsItem(R.drawable.sunny,model.GetaverageTemperatureForEvening())
+            DayTemperatureDetailsItem(R.drawable.lightrain,model.GetaverageTemperatureForNight())
         }
         Box(
             modifier = Modifier

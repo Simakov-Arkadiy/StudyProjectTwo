@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 
 @Composable
-internal fun DayTemperatureListScreen(controller: NavHostController, weatherList: ArrayList<DayTemperature>) {
+internal fun DayTemperatureListScreen(controller: NavHostController, weatherList: ArrayList<DayTemperature>, model: DayTemperatureDetailsModel) {
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(10.dp),
         modifier = Modifier
@@ -22,6 +22,6 @@ internal fun DayTemperatureListScreen(controller: NavHostController, weatherList
             ,
         contentPadding = PaddingValues(20.dp)
     ) {
-        items(weatherList) { weather-> DayTemperatureItem(weather, controller) }
+        items(weatherList) { weather-> DayTemperatureItem(weather, controller, model) }
     }
 }

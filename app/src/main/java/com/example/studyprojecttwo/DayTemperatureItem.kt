@@ -24,8 +24,12 @@ import java.util.Locale
 
 
 @Composable
-internal fun DayTemperatureItem(item:DayTemperature, controller:NavHostController){
-    val formatter = SimpleDateFormat("dd.MM.yyyy",Locale.getDefault())
+internal fun DayTemperatureItem(
+    item: DayTemperature,
+    controller: NavHostController,
+    model: DayTemperatureDetailsModel
+) {
+    val formatter = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
     val formatterDayOfWeek = SimpleDateFormat("EEEE", Locale.getDefault())
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -36,11 +40,14 @@ internal fun DayTemperatureItem(item:DayTemperature, controller:NavHostControlle
             .background(BackgroundColorForDayTemperatureItem, shape = RoundedCornerShape(26.dp))
             .padding(16.dp, 10.dp)
             .clickable(onClick = {
+                model.SetDayTemperatureDetails(
+                    item.dayTemperatureDetails.averageTemperatureForMoning,
+                    item.dayTemperatureDetails.averageTemperatureForDay,
+                    item.dayTemperatureDetails.averageTemperatureForEvening,
+                    item.dayTemperatureDetails.averageTemperatureForNight
+                )
                 controller.navigate(
-                    "HourlyWeatherForecastScreen/${item.dayTemperatureDetails.averageTemperatureForMoning}/" +
-                            "${item.dayTemperatureDetails.averageTemperatureForDay}/" +
-                            "${item.dayTemperatureDetails.averageTemperatureForEvening}/" +
-                            "${item.dayTemperatureDetails.averageTemperatureForNight}"
+                    "HourlyWeatherForecastScreen"
                 )
             })
     ) {
