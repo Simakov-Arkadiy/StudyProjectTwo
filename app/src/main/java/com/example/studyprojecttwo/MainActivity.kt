@@ -6,11 +6,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.NavType
-import androidx.navigation.navArgument
 import java.util.Date
 
 
@@ -73,26 +72,16 @@ internal var weathes: ArrayList<DayTemperature> = arrayListOf(
 @Composable
 fun NavigationScreen() {
     val navigateObject = rememberNavController()
+    val model: DayTemperatureDetailsModel = viewModel()
     NavHost(navController = navigateObject, startDestination = "DayTemperatureListScreen") {
         composable("DayTemperatureListScreen") {
 
-            DayTemperatureListScreen(navigateObject,weathes)
+            DayTemperatureListScreen(navigateObject,weathes, model)
         }
         composable(
-            "HourlyWeatherForecastScreen/{morning}/{day}/{evening}/{night}", arguments = listOf(
-                navArgument("morning") { type = NavType.IntType },
-                navArgument("day") { type = NavType.IntType },
-                navArgument("evening") { type = NavType.IntType },
-                navArgument("night") { type = NavType.IntType })
-        ) {
+            "HourlyWeatherForecastScreen") {
 
-                entry ->
-            val morning = entry.arguments?.getInt("morning")
-            val day = entry.arguments?.getInt("day")
-            val evening = entry.arguments?.getInt("evening")
-            val night = entry.arguments?.getInt("night")
-
-            DayTemperatureDetailsScreen(navigateObject, morning, day, evening, night)
+            DayTemperatureDetailsScreen(navigateObject, model)
         }
     }
 }

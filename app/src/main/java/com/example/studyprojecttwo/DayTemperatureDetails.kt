@@ -1,8 +1,8 @@
 package com.example.studyprojecttwo
 
 internal data class DayTemperatureDetails(
-    val averageTemperatureForMoning: Int,
-    val averageTemperatureForDay: Int,
-    val averageTemperatureForEvening: Int,
-    val averageTemperatureForNight: Int
+    var averageTemperatureForMoning: Int =0,
+    var averageTemperatureForDay: Int=0,
+    var averageTemperatureForEvening: Int=0,
+    var averageTemperatureForNight: Int=0
 )
