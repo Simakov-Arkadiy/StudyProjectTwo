@@ -1,4 +1,4 @@
-package com.example.studyprojecttwo
+package com.example.studyprojecttwo.presentation
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.clickable
 import androidx.navigation.NavHostController
 import androidx.compose.ui.Alignment
+import com.example.studyprojecttwo.domain.WeatherForecastDailyPeriod
 import com.example.studyprojecttwo.ui.theme.BackgroundColorForDayTemperatureItem
 import com.example.studyprojecttwo.ui.theme.ColorForMinorText
 import java.text.SimpleDateFormat
@@ -24,10 +25,9 @@ import java.util.Locale
 
 
 @Composable
-internal fun DayTemperatureItem(
-    item: DayTemperature,
+internal fun WeatherForecastDailyPeriodItem(
+    item: WeatherForecastDailyPeriod,
     controller: NavHostController,
-    model: DayTemperatureDetailsModel
 ) {
     val formatter = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
     val formatterDayOfWeek = SimpleDateFormat("EEEE", Locale.getDefault())
@@ -40,14 +40,9 @@ internal fun DayTemperatureItem(
             .background(BackgroundColorForDayTemperatureItem, shape = RoundedCornerShape(26.dp))
             .padding(16.dp, 10.dp)
             .clickable(onClick = {
-                model.SetDayTemperatureDetails(
-                    item.dayTemperatureDetails.averageTemperatureForMoning,
-                    item.dayTemperatureDetails.averageTemperatureForDay,
-                    item.dayTemperatureDetails.averageTemperatureForEvening,
-                    item.dayTemperatureDetails.averageTemperatureForNight
-                )
                 controller.navigate(
-                    "HourlyWeatherForecastScreen"
+
+                    "WeatherForecastHourlyPeriodScreen/${item.date.time}"
                 )
             })
     ) {
@@ -56,7 +51,7 @@ internal fun DayTemperatureItem(
             Text(text = formatterDayOfWeek.format(item.date), color = Color.White, fontSize = 22.sp)
         }
         Text(
-            text = "${item.averageTemperature} *C",
+            text = "${item.averageDayTemperature} *C",
             color = Color.White,
             fontSize = 26.sp
         )

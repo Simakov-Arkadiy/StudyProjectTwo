@@ -1,4 +1,4 @@
-package com.example.studyprojecttwo
+package com.example.studyprojecttwo.presentation
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -17,9 +17,13 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.runtime.Composable
 
 @Composable
-internal fun DayTemperatureDetailsItem(imagId: Int, averageDayTemperatureDetails: Int?){
+internal fun DayTemperatureDetailsItem(imagId: Int, averageDayTemperatureDetails: Int?) {
     Column(verticalArrangement = Arrangement.SpaceEvenly) {
-        Box(modifier = Modifier.height(50.dp).width(50.dp)){
+        Box(
+            modifier = Modifier
+                .height(50.dp)
+                .width(50.dp)
+        ) {
             Image(
                 bitmap = ImageBitmap.imageResource(imagId),
                 contentDescription = "облачно",
