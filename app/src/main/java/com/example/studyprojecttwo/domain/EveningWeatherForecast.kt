@@ -1,0 +1,9 @@
+package com.example.studyprojecttwo.domain
+
+import android.media.Image
+
+internal class EveningWeatherForecast(
+    override val averageTemperature: Int,
+    val averageWindSpeed: Int,
+    val drawableResId: Int
+) : WeatherForecast()

@@ -1,4 +1,4 @@
-package com.example.studyprojecttwo.presentation
+package com.example.studyprojecttwo.presentation.detailedWeatherForecast
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -17,7 +17,10 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.runtime.Composable
 
 @Composable
-internal fun DayTemperatureDetailsItem(imagId: Int, averageDayTemperatureDetails: Int?) {
+internal fun DetailedWeatherForecastTemperatureItem(
+    imagId: Int,
+    averageDayTemperatureDetails: Int?
+) {
     Column(verticalArrangement = Arrangement.SpaceEvenly) {
         Box(
             modifier = Modifier

@@ -1,4 +1,4 @@
-package com.example.studyprojecttwo.presentation
+package com.example.studyprojecttwo.presentation.detailedWeatherForecast
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
@@ -33,18 +33,17 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.studyprojecttwo.R
 import com.example.studyprojecttwo.ui.theme.BackgroundColorForDayTemperatureDetailsScreen
 import com.example.studyprojecttwo.ui.theme.ColorForMinorText
-import java.util.Date
 
 @Composable
-internal fun WeatherForecastHourlyPeriodScreen(
+internal fun DetailedWeatherForecastScreen(
     controller: NavHostController,
-    viewModel: WeatherForecastHourlyPeriodViewModel = viewModel(),
-    date: Date,
+    viewModel: DetailedWeatherForecastViewModel = viewModel(),
+    id: Int
 ) {
     val items = viewModel.items.collectAsState()
 
-    LaunchedEffect(date) {
-        viewModel.getDataForState(date)
+    LaunchedEffect(id) {
+        viewModel.searchWeatherForecast(id)
     }
 
     BackHandler {
@@ -77,25 +76,25 @@ internal fun WeatherForecastHourlyPeriodScreen(
                     .background(Color.White, shape = RoundedCornerShape(25.dp))
                     .padding(15.dp, 10.dp)
             ) {
-                DayTemperatureDetailsItem(
-                    R.drawable.cloudy,
-                    mrr.value.averageTemperatureForMorning
+                DetailedWeatherForecastTemperatureItem(
+                    mrr.value.morningWeatherForecast.drawableResId,
+                    mrr.value.morningWeatherForecast.averageTemperature
                 )
-                DayTemperatureDetailsItem(
-                    R.drawable.snow,
-                    mrr.value.averageTemperatureForDay
+                DetailedWeatherForecastTemperatureItem(
+                    mrr.value.dayWeatherForecast.drawableResId,
+                    mrr.value.dayWeatherForecast.averageTemperature
                 )
-                DayTemperatureDetailsItem(
-                    R.drawable.sunny,
-                    mrr.value.averageTemperatureForEvening
+                DetailedWeatherForecastTemperatureItem(
+                    mrr.value.eveningWeatherForecast.drawableResId,
+                    mrr.value.eveningWeatherForecast.averageTemperature
                 )
-                DayTemperatureDetailsItem(
-                    R.drawable.lightrain,
-                    mrr.value.averageTemperatureForNight
+                DetailedWeatherForecastTemperatureItem(
+                    mrr.value.nightWeatherForecast.drawableResId,
+                    mrr.value.nightWeatherForecast.averageTemperature
                 )
             }
         }
-        items.let{ trr ->
+        items.let { trr ->
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -117,22 +116,22 @@ internal fun WeatherForecastHourlyPeriodScreen(
                         .align(Alignment.Center)
                 ) {
                     Text(
-                        text = trr.value.averageTemperatureForMorning.toString(),
+                        text = trr.value.morningWeatherForecast.averageWindSpeed.toString(),
                         color = Color.Black,
                         fontSize = 25.sp,
                     )
                     Text(
-                        text = trr.value.averageTemperatureForDay.toString(),
+                        text = trr.value.dayWeatherForecast.averageWindSpeed.toString(),
                         color = Color.Black,
                         fontSize = 25.sp,
                     )
                     Text(
-                        text = trr.value.averageTemperatureForEvening.toString(),
+                        text = trr.value.eveningWeatherForecast.averageWindSpeed.toString(),
                         color = Color.Black,
                         fontSize = 25.sp,
                     )
                     Text(
-                        text = trr.value.averageTemperatureForNight.toString(),
+                        text = trr.value.nightWeatherForecast.averageWindSpeed.toString(),
                         color = Color.Black,
                         fontSize = 25.sp,
                     )

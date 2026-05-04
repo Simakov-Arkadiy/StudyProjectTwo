@@ -1,4 +1,4 @@
-package com.example.studyprojecttwo.presentation
+package com.example.studyprojecttwo.presentation.dailyWeatherForecast
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
@@ -17,7 +17,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.clickable
 import androidx.navigation.NavHostController
 import androidx.compose.ui.Alignment
-import com.example.studyprojecttwo.domain.WeatherForecastDailyPeriod
+import com.example.studyprojecttwo.domain.DailyWeatherForecast
 import com.example.studyprojecttwo.ui.theme.BackgroundColorForDayTemperatureItem
 import com.example.studyprojecttwo.ui.theme.ColorForMinorText
 import java.text.SimpleDateFormat
@@ -25,8 +25,8 @@ import java.util.Locale
 
 
 @Composable
-internal fun WeatherForecastDailyPeriodItem(
-    item: WeatherForecastDailyPeriod,
+internal fun DailyWeatherForecastItem(
+    item: DailyWeatherForecast,
     controller: NavHostController,
 ) {
     val formatter = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
@@ -42,7 +42,7 @@ internal fun WeatherForecastDailyPeriodItem(
             .clickable(onClick = {
                 controller.navigate(
 
-                    "WeatherForecastHourlyPeriodScreen/${item.date.time}"
+                    "DetailedWeatherForecastScreen/${item.id}"
                 )
             })
     ) {
@@ -51,7 +51,7 @@ internal fun WeatherForecastDailyPeriodItem(
             Text(text = formatterDayOfWeek.format(item.date), color = Color.White, fontSize = 22.sp)
         }
         Text(
-            text = "${item.averageDayTemperature} *C",
+            text = "${item.averageTemperature} *C",
             color = Color.White,
             fontSize = 26.sp
         )

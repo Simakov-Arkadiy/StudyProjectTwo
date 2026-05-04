@@ -11,7 +11,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import java.util.Date
+import com.example.studyprojecttwo.presentation.dailyWeatherForecast.DailyWeatherForecastScreen
+import com.example.studyprojecttwo.presentation.detailedWeatherForecast.DetailedWeatherForecastScreen
 
 
 class MainActivity : ComponentActivity() {
@@ -27,21 +28,21 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun NavigationScreen() {
     val navigateObject = rememberNavController()
-    NavHost(navController = navigateObject, startDestination = "WeatherForecastDailyPeriodScreen") {
-        composable("WeatherForecastDailyPeriodScreen") {
+    NavHost(navController = navigateObject, startDestination = "DailyWeatherForecastScreen") {
+        composable("DailyWeatherForecastScreen") {
 
-            WeatherForecastDailyPeriodScreen(navigateObject)
+            DailyWeatherForecastScreen(navigateObject)
         }
         composable(
-            "WeatherForecastHourlyPeriodScreen/{date}", arguments = listOf(navArgument("date") {
+            "DetailedWeatherForecastScreen/{id}", arguments = listOf(navArgument("id") {
                 type =
-                    NavType.LongType
+                    NavType.IntType
             })
         ) { entry ->
-            val date = Date(entry.arguments?.getLong("date") ?: System.currentTimeMillis())
+            val id = entry.arguments?.getInt("id") ?: 0
 
 
-            WeatherForecastHourlyPeriodScreen(navigateObject, date = date)
+            DetailedWeatherForecastScreen(navigateObject, id = id)
         }
     }
 }
