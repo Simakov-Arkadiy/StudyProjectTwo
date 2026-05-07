@@ -42,7 +42,7 @@ internal fun DailyWeatherForecastItem(
             .clickable(onClick = {
                 controller.navigate(
 
-                    "DetailedWeatherForecastScreen/${item.id}"
+                    "DetailedWeatherForecastScreen/${item.date.time}"
                 )
             })
     ) {
@@ -51,7 +51,7 @@ internal fun DailyWeatherForecastItem(
             Text(text = formatterDayOfWeek.format(item.date), color = Color.White, fontSize = 22.sp)
         }
         Text(
-            text = "${item.averageTemperature} *C",
+            text = "${item.weatherInfo.averageTemperature} *C",
             color = Color.White,
             fontSize = 26.sp
         )

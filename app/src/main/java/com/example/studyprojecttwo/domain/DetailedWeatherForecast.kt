@@ -1,9 +1,11 @@
 package com.example.studyprojecttwo.domain
 
+import java.util.Date
+
 internal data class DetailedWeatherForecast(
-    val morningWeatherForecast: MorningWeatherForecast,
-    val dayWeatherForecast: DayWeatherForecast,
-    val eveningWeatherForecast: EveningWeatherForecast,
-    val nightWeatherForecast: NightWeatherForecast,
-    val id: Int,
+    val date: Date,
+    val morningWeather: WeatherInfoAdvanced,
+    val dayForecast: WeatherInfoAdvanced,
+    val eveningForecast: WeatherInfoAdvanced,
+    val nightForecast: WeatherInfoAdvanced,
 )

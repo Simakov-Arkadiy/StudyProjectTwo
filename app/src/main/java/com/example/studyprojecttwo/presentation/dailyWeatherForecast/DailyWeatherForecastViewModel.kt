@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 
-class DailyWeatherForecastViewModel : ViewModel() {
+internal class DailyWeatherForecastViewModel : ViewModel() {
     private val _items = MutableStateFlow(listOf<DailyWeatherForecast>())
     val items = _items.asStateFlow()
 

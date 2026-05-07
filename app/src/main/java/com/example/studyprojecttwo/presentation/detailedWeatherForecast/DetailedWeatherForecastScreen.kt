@@ -29,6 +29,7 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.studyprojecttwo.R
 import com.example.studyprojecttwo.ui.theme.BackgroundColorForDayTemperatureDetailsScreen
@@ -37,13 +38,14 @@ import com.example.studyprojecttwo.ui.theme.ColorForMinorText
 @Composable
 internal fun DetailedWeatherForecastScreen(
     controller: NavHostController,
-    viewModel: DetailedWeatherForecastViewModel = viewModel(),
-    id: Int
+    viewModel: DetailedWeatherForecastViewModel,
+    date: Long,
 ) {
+
     val items = viewModel.items.collectAsState()
 
-    LaunchedEffect(id) {
-        viewModel.searchWeatherForecast(id)
+    LaunchedEffect(date) {
+        viewModel.searchWeatherForecast(date)
     }
 
     BackHandler {
