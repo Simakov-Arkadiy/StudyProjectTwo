@@ -1,10 +1,14 @@
 package com.example.studyprojecttwo.data
 
 
+import androidx.lifecycle.viewModelScope
 import com.example.studyprojecttwo.R
 import com.example.studyprojecttwo.domain.DetailedWeatherForecast
 import com.example.studyprojecttwo.domain.Precipitation
 import com.example.studyprojecttwo.domain.WeatherInfoAdvanced
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import java.util.Date
 
 internal class DetailedWeatherForecastList{

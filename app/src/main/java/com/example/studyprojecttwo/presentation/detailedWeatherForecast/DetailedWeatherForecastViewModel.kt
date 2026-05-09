@@ -2,7 +2,9 @@ package com.example.studyprojecttwo.presentation.detailedWeatherForecast
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.studyprojecttwo.data.DetailedWeatherForecastList
+import com.example.studyprojecttwo.data.RetrofitClient
 import com.example.studyprojecttwo.domain.DetailedWeatherForecast
 import com.example.studyprojecttwo.domain.Precipitation
 import com.example.studyprojecttwo.domain.WeatherInfoAdvanced
@@ -10,6 +12,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 import java.util.Date
 
 @HiltViewModel
