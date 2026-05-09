@@ -4,7 +4,7 @@ import java.util.Date
 
 internal data class DetailedWeatherForecast(
     val date: Date,
-    val morningWeather: WeatherInfoAdvanced,
+    val morningForecast: WeatherInfoAdvanced,
     val dayForecast: WeatherInfoAdvanced,
     val eveningForecast: WeatherInfoAdvanced,
     val nightForecast: WeatherInfoAdvanced,

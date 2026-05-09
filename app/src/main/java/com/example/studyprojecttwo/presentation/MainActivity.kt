@@ -15,8 +15,9 @@ import androidx.navigation.navArgument
 import com.example.studyprojecttwo.presentation.dailyWeatherForecast.DailyWeatherForecastScreen
 import com.example.studyprojecttwo.presentation.detailedWeatherForecast.DetailedWeatherForecastScreen
 import com.example.studyprojecttwo.presentation.detailedWeatherForecast.DetailedWeatherForecastViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,13 +40,12 @@ fun NavigationScreen() {
         composable(
             "DetailedWeatherForecastScreen/{date}", arguments = listOf(navArgument("date") {
                 type =
-                    NavType.IntType
+                    NavType.LongType
             })
         ) { entry ->
             val date = entry.arguments?.getLong("date") ?: 0
-            val dsgg = DetailedWeatherForecastViewModel()
 
-            DetailedWeatherForecastScreen(navigateObject, viewModel()  ,date = date )
+            DetailedWeatherForecastScreen(navigateObject,date = date )
         }
     }
 }

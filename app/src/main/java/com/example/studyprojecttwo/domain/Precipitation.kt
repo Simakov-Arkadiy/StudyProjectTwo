@@ -1,5 +1,7 @@
 package com.example.studyprojecttwo.domain
 
-internal enum class Precipitation {
-    SUNNY, LIGHT_RAIN, SNOW, CLOUDY;
+import com.example.studyprojecttwo.R
+
+internal enum class Precipitation(val value:Int) {
+    SUNNY(R.drawable.sunny), LIGHT_RAIN(R.drawable.lightrain), SNOW(R.drawable.snow), CLOUDY(R.drawable.cloudy);
 }
