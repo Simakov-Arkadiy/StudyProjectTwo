@@ -1,26 +1,26 @@
 package com.example.studyprojecttwo.data
 
-import com.google.gson.annotations.SerializedName
+class APIResponse {
+    internal suspend fun fetchWeather(): DailyWeatherForecastList {
 
+        val response = RetrofitClient.apiService.getWeather(
+            55.4636,
+            65.3431,
+            "temperature_2m_max",
+            "temperature_2m,wind_speed_10m",
+            "temperature_2m,wind_speed_10m",
+            "GMT+5",
+            16,
+            "ms",
+            "hourly_6"
+        )
 
-data class APIResponse(
+        val dailyWeatherForecastList = DailyWeatherForecastList()
+        dailyWeatherForecastList.initList(response)
 
-    val hourly: Horly,
-    @SerializedName("hourly_units")
-    val hourlyUnits: HourlyUnits,
-    val daily: Daily,
-    @SerializedName("daily_units")
-    val dailyUnit: DailyUnit
-)
+        val detailedWeatherForecastList = DetailedWeatherForecastList()
+        detailedWeatherForecastList.initList(response)
 
-
-data class Horly(val time: List<String>, @SerializedName("temperature_2m") val temperatureM: List<Float>, @SerializedName("wind_speed_10m") val windSpeed: List<Float>)
-
-
-data class HourlyUnits(@SerializedName("temperature_2m") val temperatureM: String,@SerializedName("wind_speed_10m") val windSpeed:String )
-
-
-data class Daily(val time: List<String>,@SerializedName("temperature_2m") val temperatureM: List<Float>)
-
-
-data class DailyUnit(@SerializedName("temperature_2m") val temperatureM: List<String>)
+        return dailyWeatherForecastList
+    }
+}

@@ -23,10 +23,10 @@ internal class DetailedWeatherForecastViewModel @Inject constructor(
         MutableStateFlow(
             DetailedWeatherForecast(
                 Date(0),
-                WeatherInfoAdvanced(0, 0, Precipitation.SNOW),
-                WeatherInfoAdvanced(0, 0, Precipitation.SNOW),
-                WeatherInfoAdvanced(0, 0, Precipitation.SNOW),
-                WeatherInfoAdvanced(0, 0, Precipitation.SNOW)
+                WeatherInfoAdvanced(0F, 0F, Precipitation.SNOW),
+                WeatherInfoAdvanced(0F, 0F, Precipitation.SNOW),
+                WeatherInfoAdvanced(0F, 0F, Precipitation.SNOW),
+                WeatherInfoAdvanced(0F, 0F, Precipitation.SNOW)
             )
         )
     val items = _items.asStateFlow()

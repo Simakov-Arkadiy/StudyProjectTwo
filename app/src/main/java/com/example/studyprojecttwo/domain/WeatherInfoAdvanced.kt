@@ -1,7 +1,7 @@
 package com.example.studyprojecttwo.domain
 
 internal data class WeatherInfoAdvanced(
-    val averageTemperature: Int,
-    val averageWindSpeed: Int,
+    val averageTemperature: Float,
+    val averageWindSpeed: Float,
     val precipitation: Precipitation,
 )

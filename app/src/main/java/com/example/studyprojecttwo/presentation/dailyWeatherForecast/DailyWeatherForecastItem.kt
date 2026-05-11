@@ -15,6 +15,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.clickable
+import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController
 import androidx.compose.ui.Alignment
 import com.example.studyprojecttwo.domain.DailyWeatherForecast
@@ -23,14 +24,14 @@ import com.example.studyprojecttwo.ui.theme.ColorForMinorText
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-
 @Composable
 internal fun DailyWeatherForecastItem(
     item: DailyWeatherForecast,
     controller: NavHostController,
 ) {
-    val formatter = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
-    val formatterDayOfWeek = SimpleDateFormat("EEEE", Locale.getDefault())
+    val formatter = remember { SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()) }
+
+    val formatterDayOfWeek = remember { SimpleDateFormat("EEEE", Locale.getDefault()) }
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,

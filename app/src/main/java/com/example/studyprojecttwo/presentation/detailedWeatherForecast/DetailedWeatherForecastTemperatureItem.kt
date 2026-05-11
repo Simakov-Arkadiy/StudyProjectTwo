@@ -19,7 +19,7 @@ import androidx.compose.runtime.Composable
 @Composable
 internal fun DetailedWeatherForecastTemperatureItem(
     imagId: Int,
-    averageDayTemperatureDetails: Int?
+    averageDayTemperatureDetails: Float?
 ) {
     Column(verticalArrangement = Arrangement.SpaceEvenly) {
         Box(
