@@ -1,6 +1,6 @@
 package com.example.studyprojecttwo.data
 
-class APIResponse {
+class ApiResponse {
     internal suspend fun fetchWeather(): DailyWeatherForecastList {
 
         val response = RetrofitClient.apiService.getWeather(
@@ -14,12 +14,13 @@ class APIResponse {
             "ms",
             "hourly_6"
         )
+        println("=== API Response: $response ===")
 
-        val dailyWeatherForecastList = DailyWeatherForecastList()
-        dailyWeatherForecastList.initList(response)
+        var dailyWeatherForecastList = DailyWeatherForecastList()
+        dailyWeatherForecastList = dailyWeatherForecastList.copy(dailyWeatherForecastList.getData(response))
 
-        val detailedWeatherForecastList = DetailedWeatherForecastList()
-        detailedWeatherForecastList.initList(response)
+        var detailedWeatherForecastList = DetailedWeatherForecastList()
+        detailedWeatherForecastList = detailedWeatherForecastList.copy(detailedWeatherForecastList.getData(response))
 
         return dailyWeatherForecastList
     }

@@ -1,7 +1,10 @@
 package com.example.studyprojecttwo.data
 
+import kotlinx.serialization.json.Json
+import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.kotlinx.serialization.asConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -21,11 +24,18 @@ interface WeatherApiService {
     ): APIModel
 }
 object RetrofitClient {
+
+    private  val json = Json {
+        ignoreUnknownKeys = true
+        coerceInputValues = true
+        encodeDefaults = true
+    }
     private const val BASE_URL = "https://api.open-meteo.com/v1/"
+    private val contentType = "application/json".toMediaType()
     val apiService: WeatherApiService by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(json.asConverterFactory(contentType))
             .build()
             .create(WeatherApiService::class.java)
     }

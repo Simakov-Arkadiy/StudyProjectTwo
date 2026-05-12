@@ -7,7 +7,7 @@ import java.util.Date
 import java.util.Locale
 internal data class DailyWeatherForecastList(
 
-    var list: List<DailyWeatherForecast> = listOf(
+    val list: List<DailyWeatherForecast> = listOf(
         DailyWeatherForecast(Date(nowTime), WeatherInfoShort(-8F)),
         DailyWeatherForecast(Date(nowTime + 24 * 60 * 60 * 1000L), WeatherInfoShort(-5F)),
         DailyWeatherForecast(Date(nowTime + 2 * 24 * 60 * 60 * 1000L), WeatherInfoShort(-7F)),
@@ -28,7 +28,7 @@ internal data class DailyWeatherForecastList(
         DailyWeatherForecast(Date(nowTime + 17 * 24 * 60 * 60 * 1000L), WeatherInfoShort(-10F)),
     )
 ) {
-    fun initList(response: APIModel) {
+    fun getData(response: APIModel): MutableList<DailyWeatherForecast> {
 
         val dailyWeatherForecastList: MutableList<DailyWeatherForecast> = mutableListOf()
         val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
@@ -58,7 +58,7 @@ internal data class DailyWeatherForecastList(
             dailyWeatherForecastList.add(dailyWeatherForecast)
 
         }
-        list = dailyWeatherForecastList
+       return  dailyWeatherForecastList
     }
 }
 val nowTime = System.currentTimeMillis()

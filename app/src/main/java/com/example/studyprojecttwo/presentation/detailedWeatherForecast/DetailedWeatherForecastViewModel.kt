@@ -34,7 +34,8 @@ internal class DetailedWeatherForecastViewModel @Inject constructor(
     val date: Long = savedStateHandle["date"] ?: 0
 
     init {
-        _items.value = DetailedWeatherForecastList.getDetailedWeatherForecast(date)
+        val detailedWeatherForecastList = DetailedWeatherForecastList()
+        _items.value = detailedWeatherForecastList.getDetailedWeatherForecast(date)
     }
 }
 

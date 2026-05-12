@@ -23,6 +23,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.offset
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.layout.ContentScale
@@ -30,16 +31,16 @@ import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.example.studyprojecttwo.R
+import com.example.studyprojecttwo.domain.DetailedWeatherForecast
 import com.example.studyprojecttwo.ui.theme.BackgroundColorForDayTemperatureDetailsScreen
 import com.example.studyprojecttwo.ui.theme.ColorForMinorText
 import dagger.hilt.android.AndroidEntryPoint
-
 
 @Composable
 internal fun DetailedWeatherForecastScreen(
     controller: NavHostController,
     viewModel: DetailedWeatherForecastViewModel = hiltViewModel(),
-    date: Long,
+   date: Long,
 ) {
 
     val items = viewModel.items.collectAsState()
@@ -91,50 +92,7 @@ internal fun DetailedWeatherForecastScreen(
                     mrr.value.nightForecast.averageTemperature
                 )
             }
-        }
-        items.let { trr ->
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(200.dp)
-                    .background(Color.White, shape = RoundedCornerShape(25.dp))
-                    .padding(15.dp, 10.dp)
-            ) {
-                Text(
-                    text = "Ветер, м/с.",
-                    color = Color.Black,
-                    fontSize = 25.sp
-                )
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceAround,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(15.dp, 10.dp)
-                        .align(Alignment.Center)
-                ) {
-                    Text(
-                        text = trr.value.morningForecast.averageWindSpeed.toString() ,
-                        color = Color.Black,
-                        fontSize = 25.sp,
-                    )
-                    Text(
-                        text = trr.value.dayForecast.averageWindSpeed.toString(),
-                        color = Color.Black,
-                        fontSize = 25.sp,
-                    )
-                    Text(
-                        text = trr.value.eveningForecast.averageWindSpeed.toString(),
-                        color = Color.Black,
-                        fontSize = 25.sp,
-                    )
-                    Text(
-                        text = trr.value.nightForecast.averageWindSpeed.toString(),
-                        color = Color.Black,
-                        fontSize = 25.sp,
-                    )
-                }
-            }
+            WindForecastItem(mrr.value)
         }
 
         val uriHandler = LocalUriHandler.current
