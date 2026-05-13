@@ -19,28 +19,17 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.offset
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
-import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.example.studyprojecttwo.R
-import com.example.studyprojecttwo.domain.DetailedWeatherForecast
 import com.example.studyprojecttwo.ui.theme.BackgroundColorForDayTemperatureDetailsScreen
-import com.example.studyprojecttwo.ui.theme.ColorForMinorText
-import dagger.hilt.android.AndroidEntryPoint
 
 @Composable
 internal fun DetailedWeatherForecastScreen(
     controller: NavHostController,
     viewModel: DetailedWeatherForecastViewModel = hiltViewModel(),
-   date: Long,
+    date: Long,
 ) {
 
     val items = viewModel.items.collectAsState()
@@ -96,25 +85,6 @@ internal fun DetailedWeatherForecastScreen(
         }
 
         val uriHandler = LocalUriHandler.current
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(250.dp)
-                .background(Color.White, shape = RoundedCornerShape(25.dp))
-                .padding(15.dp, 10.dp)
-                .clickable(onClick = { uriHandler.openUri("https://alfabank.ru/sme/raschetnyj-schet/") }),
-            contentAlignment = Alignment.BottomCenter
-        ) {
-            Row(modifier = Modifier.offset(x = -70.dp, y = -190.dp)) {
-                Text(text = "alfabank.ru", color = Color.Black, fontSize = 15.sp)
-                Text(text = "  Реклама", color = ColorForMinorText, fontSize = 15.sp)
-            }
-            Image(
-                bitmap = ImageBitmap.imageResource(R.drawable.advertising),
-                contentDescription = "реклама",
-                contentScale = ContentScale.FillWidth,
-                modifier = Modifier.fillMaxWidth(),
-            )
-        }
+        AdvertisingBannerItem(uriHandler)
     }
 }

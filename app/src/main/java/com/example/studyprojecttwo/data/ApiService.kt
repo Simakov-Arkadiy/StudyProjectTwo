@@ -23,9 +23,10 @@ interface WeatherApiService {
         //https://api.open-meteo.com/v1/forecast?latitude=52.26&longitude=65.2&daily=temperature_2m_max&hourly=temperature_2m,wind_speed_10m&current=temperature_2m,wind_speed_10m&timezone=GMT&forecast_days=16&wind_speed_unit=ms&temporal_resolution=hourly_6
     ): APIModel
 }
+
 object RetrofitClient {
 
-    private  val json = Json {
+    private val json = Json {
         ignoreUnknownKeys = true
         coerceInputValues = true
         encodeDefaults = true
