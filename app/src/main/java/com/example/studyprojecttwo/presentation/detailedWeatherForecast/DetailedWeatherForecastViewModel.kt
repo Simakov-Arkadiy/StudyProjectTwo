@@ -2,7 +2,7 @@ package com.example.studyprojecttwo.presentation.detailedWeatherForecast
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import com.example.studyprojecttwo.data.Repository
+import com.example.studyprojecttwo.data.WeatherForecastRepository
 import com.example.studyprojecttwo.domain.DetailedWeatherForecast
 import com.example.studyprojecttwo.domain.Precipitation
 import com.example.studyprojecttwo.domain.WeatherInfoAdvanced
@@ -15,6 +15,7 @@ import java.util.Date
 @HiltViewModel
 internal class DetailedWeatherForecastViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
+    val repository: WeatherForecastRepository
 ) : ViewModel() {
     private val _items =
         MutableStateFlow(
@@ -31,8 +32,7 @@ internal class DetailedWeatherForecastViewModel @Inject constructor(
     val date: Long = savedStateHandle["date"] ?: 0
 
     init {
-        val detailedWeatherForecastList = Repository()
-        _items.value = detailedWeatherForecastList.getDetailedWeatherForecast(date)
+        _items.value = repository.getDetailedWeatherForecast(date)
     }
 }
 

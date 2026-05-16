@@ -14,11 +14,12 @@ import androidx.navigation.NavHostController
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 
 @Composable
 internal fun DailyWeatherForecastScreen(
     controller: NavHostController,
-    viewModel: DailyWeatherForecastViewModel = viewModel()
+    viewModel: DailyWeatherForecastViewModel = hiltViewModel()
 ) {
     val items by viewModel.items.collectAsState()
     LazyColumn(
@@ -28,7 +29,6 @@ internal fun DailyWeatherForecastScreen(
             .background(Color(31, 44, 96)),
         contentPadding = PaddingValues(20.dp)
     ) {
-        items(viewModel.items.value) { weather -> DailyWeatherForecastItem(weather, controller) }
         items(items) { weather ->
             DailyWeatherForecastItem(weather, controller)
         }
