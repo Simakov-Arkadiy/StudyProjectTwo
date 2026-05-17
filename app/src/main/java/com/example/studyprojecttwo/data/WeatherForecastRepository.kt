@@ -13,6 +13,7 @@ import javax.inject.Singleton
 
 @Singleton
 internal class WeatherForecastRepository @Inject constructor(
+
     val mapper: WeatherForecastMapper,
     val weatherForecastRemoteDataSource: WeatherForecastRemoteDataSource,
     var weatherLocalDataSource: WeatherLocalDataSource,

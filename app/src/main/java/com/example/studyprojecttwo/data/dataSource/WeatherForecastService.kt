@@ -11,7 +11,7 @@ import retrofit2.converter.kotlinx.serialization.asConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface WeatherForecastService {
+internal interface WeatherForecastService {
     @GET("forecast")
     suspend fun getWeather(
         @Query("latitude") latitude: Double,
@@ -28,7 +28,7 @@ interface WeatherForecastService {
 
 @Module
 @InstallIn(SingletonComponent::class)
-object RetrofitClient {
+internal object RetrofitClient {
 
     @Provides
     fun getJson(): Json {
