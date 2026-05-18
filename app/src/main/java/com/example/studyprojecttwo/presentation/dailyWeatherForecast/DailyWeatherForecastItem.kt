@@ -24,14 +24,15 @@ import com.example.studyprojecttwo.ui.theme.ColorForMinorText
 import java.text.SimpleDateFormat
 import java.util.Locale
 
+
 @Composable
 internal fun DailyWeatherForecastItem(
     item: DailyWeatherForecast,
     controller: NavHostController,
 ) {
-    val formatter = remember { SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()) }
+    val dayFormatter = remember() { SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()) }
+    val dayFormatterTwo = remember() { SimpleDateFormat("EEEE", Locale.getDefault()) }
 
-    val formatterDayOfWeek = remember { SimpleDateFormat("EEEE", Locale.getDefault()) }
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -42,14 +43,17 @@ internal fun DailyWeatherForecastItem(
             .padding(16.dp, 10.dp)
             .clickable(onClick = {
                 controller.navigate(
-
-                    "DetailedWeatherForecastScreen/${item.date.time}"
+                    "DetailedWeatherForecastScreen/${item.date}"
                 )
             })
     ) {
         Column {
-            Text(text = formatter.format(item.date), color = ColorForMinorText, fontSize = 20.sp)
-            Text(text = formatterDayOfWeek.format(item.date), color = Color.White, fontSize = 22.sp)
+            Text(text = item.date, color = ColorForMinorText, fontSize = 20.sp)
+            Text(
+                text = dayFormatterTwo.format(dayFormatter.parse(item.date)),
+                color = Color.White,
+                fontSize = 22.sp
+            )
         }
         Text(
             text = "${item.weatherInfo.averageTemperature} *C",

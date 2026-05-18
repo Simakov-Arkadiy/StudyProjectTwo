@@ -5,21 +5,19 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 internal data class WeatherForecastResponse(
-
-    @SerialName("hourly") val hourlyDto: HoгrlyDto,
+    @SerialName("hourly") val hourlyDto: HourlyDto,
     @SerialName("daily") val dailyDto: DailyDto,
 )
 
-
 @Serializable
-data class HoгrlyDto(
-    @SerialName("time") val time: List<String>,
-    @SerialName("temperature_2m") val temperatureM: List<Float>,
-    @SerialName("wind_speed_10m") val windSpeed: List<Float>,
+data class HourlyDto(
+    @SerialName("time") val dateTimes: List<String?>,
+    @SerialName("temperature_2m") val averageTemperature: List<Float?>,
+    @SerialName("wind_speed_10m") val averageWindSpeed: List<Float?>,
 )
 
 @Serializable
 data class DailyDto(
-    @SerialName("time") val time: List<String>,
-    @SerialName("temperature_2m_max") val temperatureM: List<Float>,
+    @SerialName("time") val dates: List<String?>,
+    @SerialName("temperature_2m_max") val averageTemperature: List<Float?>,
 )

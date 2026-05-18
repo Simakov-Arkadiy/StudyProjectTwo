@@ -1,14 +1,11 @@
 package com.example.studyprojecttwo.domain
 
-import java.util.Date
+import androidx.compose.runtime.remember
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 
 internal data class DailyWeatherForecast(
-
-    val date: Date,
+    val date: String,
     val weatherInfo: WeatherInfoShort,
 )
-
-
-
-

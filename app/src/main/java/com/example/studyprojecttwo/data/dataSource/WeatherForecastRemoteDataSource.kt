@@ -1,11 +1,9 @@
 package com.example.studyprojecttwo.data.dataSource
 
-import retrofit2.Retrofit
 import jakarta.inject.Inject
 
 internal class WeatherForecastRemoteDataSource @Inject constructor(val weatherForecastService: WeatherForecastService) {
     internal suspend fun fetchWeather(): WeatherForecastResponse {
-
         val response = weatherForecastService.getWeather(
             latitude = 55.4636,
             longitude = 65.3431,

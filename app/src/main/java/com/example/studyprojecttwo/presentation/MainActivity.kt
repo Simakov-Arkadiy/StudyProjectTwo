@@ -29,22 +29,21 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun NavigationScreen() {
-
     val navigateObject = rememberNavController()
     NavHost(navController = navigateObject, startDestination = "DailyWeatherForecastScreen") {
-        composable("DailyWeatherForecastScreen") {
+        composable(route = "DailyWeatherForecastScreen") {
 
-            DailyWeatherForecastScreen(navigateObject)
+            DailyWeatherForecastScreen(controller = navigateObject)
         }
         composable(
-            "DetailedWeatherForecastScreen/{date}", arguments = listOf(navArgument("date") {
-                type =
-                    NavType.LongType
+            route = "DetailedWeatherForecastScreen/{date}",
+            arguments = listOf(navArgument(name = "date") {
+                type = NavType.StringType
             })
         ) { entry ->
-            val date = entry.arguments?.getLong("date") ?: 0
+            val date = entry.arguments?.getString("date") ?: "2022-07-01T00:00"
 
-            DetailedWeatherForecastScreen(navigateObject,date = date )
+            DetailedWeatherForecastScreen(controller = navigateObject, date = date)
         }
     }
 }

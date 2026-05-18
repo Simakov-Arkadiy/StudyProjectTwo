@@ -11,15 +11,16 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 @HiltViewModel
-internal class DailyWeatherForecastViewModel @Inject constructor(val repository: WeatherForecastRepository) :
-    ViewModel() {
+internal class DailyWeatherForecastViewModel @Inject constructor(
+    val repository: WeatherForecastRepository,
+) : ViewModel() {
     private val _items = MutableStateFlow(listOf<DailyWeatherForecast>())
     val items = _items.asStateFlow()
 
     init {
         viewModelScope.launch {
-            val response = repository.getDailyWeatherForecastLis()
-            _items.value = response?: emptyList()
+            val list = repository.getDailyWeatherForecastLis()
+            _items.emit(list ?: emptyList())
         }
     }
 }

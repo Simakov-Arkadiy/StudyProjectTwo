@@ -29,10 +29,9 @@ import com.example.studyprojecttwo.ui.theme.BackgroundColorForDayTemperatureDeta
 internal fun DetailedWeatherForecastScreen(
     controller: NavHostController,
     viewModel: DetailedWeatherForecastViewModel = hiltViewModel(),
-    date: Long,
+    date: String,
 ) {
-
-    val items = viewModel.items.collectAsState()
+    val items = viewModel.item.collectAsState()
 
     BackHandler {
         controller.popBackStack()

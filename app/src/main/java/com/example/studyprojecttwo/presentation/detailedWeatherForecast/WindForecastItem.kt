@@ -18,51 +18,48 @@ import androidx.compose.ui.unit.sp
 import com.example.studyprojecttwo.domain.DetailedWeatherForecast
 
 @Composable
-internal fun WindForecastItem(items:DetailedWeatherForecast){
+internal fun WindForecastItem(items: DetailedWeatherForecast) {
 
-
-        Box(
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(200.dp)
+            .background(Color.White, shape = RoundedCornerShape(25.dp))
+            .padding(15.dp, 10.dp)
+    ) {
+        Text(
+            text = "Ветер, м/с.",
+            color = Color.Black,
+            fontSize = 25.sp
+        )
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceAround,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(200.dp)
-                .background(Color.White, shape = RoundedCornerShape(25.dp))
                 .padding(15.dp, 10.dp)
+                .align(Alignment.Center)
         ) {
             Text(
-                text = "Ветер, м/с.",
+                text = items.morningForecast.averageWindSpeed.toString(),
                 color = Color.Black,
-                fontSize = 25.sp
+                fontSize = 25.sp,
             )
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceAround,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(15.dp, 10.dp)
-                    .align(Alignment.Center)
-            ) {
-                Text(
-                    text = items.morningForecast.averageWindSpeed.toString() ,
-                    color = Color.Black,
-                    fontSize = 25.sp,
-                )
-                Text(
-                    text = items.dayForecast.averageWindSpeed.toString(),
-                    color = Color.Black,
-                    fontSize = 25.sp,
-                )
-                Text(
-                    text = items.eveningForecast.averageWindSpeed.toString(),
-                    color = Color.Black,
-                    fontSize = 25.sp,
-                )
-                Text(
-                    text = items.nightForecast.averageWindSpeed.toString(),
-                    color = Color.Black,
-                    fontSize = 25.sp,
-                )
-            }
+            Text(
+                text = items.dayForecast.averageWindSpeed.toString(),
+                color = Color.Black,
+                fontSize = 25.sp,
+            )
+            Text(
+                text = items.eveningForecast.averageWindSpeed.toString(),
+                color = Color.Black,
+                fontSize = 25.sp,
+            )
+            Text(
+                text = items.nightForecast.averageWindSpeed.toString(),
+                color = Color.Black,
+                fontSize = 25.sp,
+            )
         }
-
-
+    }
 }

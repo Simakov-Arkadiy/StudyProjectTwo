@@ -29,7 +29,6 @@ internal interface WeatherForecastService {
 @Module
 @InstallIn(SingletonComponent::class)
 internal object RetrofitClient {
-
     @Provides
     fun getJson(): Json {
         return Json {
@@ -41,7 +40,6 @@ internal object RetrofitClient {
 
     @Provides
     fun getRetrofit(json: Json): Retrofit {
-
         val BASE_URL = "https://api.open-meteo.com/v1/"
         val contentType = "application/json".toMediaType()
         return Retrofit.Builder()
