@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.sp
 import com.example.studyprojecttwo.domain.DetailedWeatherForecast
 
 @Composable
-internal fun WindForecastItem(items: DetailedWeatherForecast) {
+internal fun WindForecastItem(items: DetailedWeatherForecast?) {
 
     Box(
         modifier = Modifier
@@ -41,22 +41,22 @@ internal fun WindForecastItem(items: DetailedWeatherForecast) {
                 .align(Alignment.Center)
         ) {
             Text(
-                text = items.morningForecast.averageWindSpeed.toString(),
+                text = items?.morningForecast?.averageWindSpeed.toString(),
                 color = Color.Black,
                 fontSize = 25.sp,
             )
             Text(
-                text = items.dayForecast.averageWindSpeed.toString(),
+                text = items?.dayForecast?.averageWindSpeed.toString(),
                 color = Color.Black,
                 fontSize = 25.sp,
             )
             Text(
-                text = items.eveningForecast.averageWindSpeed.toString(),
+                text = items?.eveningForecast?.averageWindSpeed.toString(),
                 color = Color.Black,
                 fontSize = 25.sp,
             )
             Text(
-                text = items.nightForecast.averageWindSpeed.toString(),
+                text = items?.nightForecast?.averageWindSpeed.toString(),
                 color = Color.Black,
                 fontSize = 25.sp,
             )

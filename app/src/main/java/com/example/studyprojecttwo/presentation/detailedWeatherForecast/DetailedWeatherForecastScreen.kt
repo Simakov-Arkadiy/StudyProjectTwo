@@ -23,6 +23,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.example.studyprojecttwo.R
+import com.example.studyprojecttwo.domain.Precipitation
 import com.example.studyprojecttwo.ui.theme.BackgroundColorForDayTemperatureDetailsScreen
 
 @Composable
@@ -64,20 +65,20 @@ internal fun DetailedWeatherForecastScreen(
                     .padding(15.dp, 10.dp)
             ) {
                 DetailedWeatherForecastTemperatureItem(
-                    mrr.value.morningForecast.precipitation.value,
-                    mrr.value.morningForecast.averageTemperature
+                    mrr.value?.morningForecast?.precipitation?.getImageId() ?: R.drawable.sunny,
+                    mrr.value?.morningForecast?.averageTemperature ?: 0f
                 )
                 DetailedWeatherForecastTemperatureItem(
-                    mrr.value.dayForecast.precipitation.value,
-                    mrr.value.dayForecast.averageTemperature
+                    mrr.value?.dayForecast?.precipitation?.getImageId() ?: R.drawable.sunny,
+                    mrr.value?.dayForecast?.averageTemperature ?: 0f
                 )
                 DetailedWeatherForecastTemperatureItem(
-                    mrr.value.eveningForecast.precipitation.value,
-                    mrr.value.eveningForecast.averageTemperature
+                    mrr.value?.eveningForecast?.precipitation?.getImageId() ?: R.drawable.sunny,
+                    mrr.value?.eveningForecast?.averageTemperature ?: 0f
                 )
                 DetailedWeatherForecastTemperatureItem(
-                    mrr.value.nightForecast.precipitation.value,
-                    mrr.value.nightForecast.averageTemperature
+                    mrr.value?.nightForecast?.precipitation?.getImageId() ?: R.drawable.sunny,
+                    mrr.value?.nightForecast?.averageTemperature ?: 0f
                 )
             }
             WindForecastItem(mrr.value)
@@ -85,5 +86,15 @@ internal fun DetailedWeatherForecastScreen(
 
         val uriHandler = LocalUriHandler.current
         AdvertisingBannerItem(uriHandler)
+    }
+}
+
+internal fun Precipitation.getImageId(): Int {
+    when (this.value) {
+        0 -> return R.drawable.sunny
+        1 -> return R.drawable.lightrain
+        2 -> return R.drawable.snow
+        3 -> return R.drawable.cloudy
+        else -> return R.drawable.sunny
     }
 }

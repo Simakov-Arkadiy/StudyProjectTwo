@@ -42,13 +42,13 @@ internal class WeatherForecastMapper @Inject constructor() {
                     DetailedWeatherForecast(
                         date = date,
                         morningForecast = weatherInfoAdvancedList.elementAtOrElse(index)
-                        { WeatherInfoAdvanced(0f, 0f, Precipitation.SNOW) },
+                        { WeatherInfoAdvanced(0f, 0f, Precipitation.SUNNY) },
                         dayForecast = weatherInfoAdvancedList.elementAtOrElse(index + 1)
-                        { WeatherInfoAdvanced(0f, 0f, Precipitation.SNOW) },
+                        { WeatherInfoAdvanced(0f, 0f, Precipitation.LIGHT_RAIN) },
                         eveningForecast = weatherInfoAdvancedList.elementAtOrElse(index + 2)
                         { WeatherInfoAdvanced(0f, 0f, Precipitation.SNOW) },
                         nightForecast = weatherInfoAdvancedList.elementAtOrElse(index + 3)
-                        { WeatherInfoAdvanced(0f, 0f, Precipitation.SNOW) },
+                        { WeatherInfoAdvanced(0f, 0f, Precipitation.CLOUDY) },
                     )
                 } else null
             }

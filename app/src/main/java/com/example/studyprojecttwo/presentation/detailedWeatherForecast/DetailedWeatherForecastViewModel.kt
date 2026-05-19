@@ -12,23 +12,14 @@ import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import java.util.Date
 
 @HiltViewModel
 internal class DetailedWeatherForecastViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
     val repository: WeatherForecastRepository,
 ) : ViewModel() {
-    private val _item =
-        MutableStateFlow(
-            DetailedWeatherForecast(
-                "2022-07-01",
-                WeatherInfoAdvanced(0F, 0F, Precipitation.SNOW),
-                WeatherInfoAdvanced(0F, 0F, Precipitation.SNOW),
-                WeatherInfoAdvanced(0F, 0F, Precipitation.SNOW),
-                WeatherInfoAdvanced(0F, 0F, Precipitation.SNOW)
-            )
-        )
+
+    private val _item = MutableStateFlow<DetailedWeatherForecast?>(null)
     val item = _item.asStateFlow()
     val date: String = savedStateHandle["date"] ?: "2022-07-01"
 
