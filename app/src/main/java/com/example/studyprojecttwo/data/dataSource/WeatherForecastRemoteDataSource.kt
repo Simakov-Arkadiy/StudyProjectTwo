@@ -3,7 +3,7 @@ package com.example.studyprojecttwo.data.dataSource
 import jakarta.inject.Inject
 
 internal class WeatherForecastRemoteDataSource @Inject constructor(val weatherForecastService: WeatherForecastService) {
-    internal suspend fun fetchWeather(): WeatherForecastResponse {
+    internal suspend fun getWeatherForecast(): WeatherForecastResponse {
         val response = weatherForecastService.getWeather(
             latitude = 55.4636,
             longitude = 65.3431,

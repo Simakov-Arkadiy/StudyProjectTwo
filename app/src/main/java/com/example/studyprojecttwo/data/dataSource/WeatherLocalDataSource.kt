@@ -12,22 +12,22 @@ internal class WeatherLocalDataSource @Inject constructor() {
     @Volatile
     private var dailyWeatherForecastList: List<DailyWeatherForecast>? = null
 
-    suspend fun setDailyWeatherForecastList(list: List<DailyWeatherForecast>) {
-        dailyWeatherForecastList = list
-    }
-
-    suspend fun getDailyWeatherForecastList(): List<DailyWeatherForecast>? {
-        return dailyWeatherForecastList
-    }
-
     @Volatile
     private var detailedWeatherForecastList: List<DetailedWeatherForecast>? = null
 
-    suspend fun setDetailedWeatherForecastList(list: List<DetailedWeatherForecast>?) {
+    suspend fun setDailyWeatherForecast(list: List<DailyWeatherForecast>) {
+        dailyWeatherForecastList = list
+    }
+
+    suspend fun getDailyWeatherForecast(): List<DailyWeatherForecast>? {
+        return dailyWeatherForecastList
+    }
+
+    suspend fun setDetailedWeatherForecast(list: List<DetailedWeatherForecast>?) {
         detailedWeatherForecastList = list
     }
 
-    suspend fun getDetailedWeatherForecastList(): List<DetailedWeatherForecast>? {
+    suspend fun getDetailedWeatherForecast(): List<DetailedWeatherForecast>? {
         return detailedWeatherForecastList
     }
 }

@@ -17,28 +17,32 @@ internal class WeatherForecastRepository @Inject constructor(
     suspend fun getDetailedWeatherForecast(date: String): Result<DetailedWeatherForecast> {
 
         val forecast =
-            weatherForecastLocalDataSource.getDetailedWeatherForecastList()?.find { item ->
+            weatherForecastLocalDataSource.getDetailedWeatherForecast()?.find { item ->
 
                 item.date?.substringBefore("T") == date
             }
-        return forecast?.let { Result.success(it) }
-            ?: Result.failure(IllegalArgumentException("Прогноз для даты $date не найден"))
+        if (forecast != null) {
+            return forecast.let { Result.success(it) }
+        } else {
+            return Result.failure(IllegalArgumentException("Прогноз для даты $date не найден"))
+        }
     }
 
-    suspend fun getDailyWeatherForecastLis(): List<DailyWeatherForecast>? {
-        val result = Result.runCatching { weatherForecastRemoteDataSource.fetchWeather() }
+    suspend fun getDailyWeatherForecast(): Result<List<DailyWeatherForecast>?> {
+        val result = Result.runCatching { weatherForecastRemoteDataSource.getWeatherForecast() }
         result.onSuccess { response ->
-            weatherForecastLocalDataSource.setDailyWeatherForecastList(
+            weatherForecastLocalDataSource.setDailyWeatherForecast(
                 mapper.mapToDailyWeatherForecast(
                     response = response
                 )
             )
-            weatherForecastLocalDataSource.setDetailedWeatherForecastList(
+            weatherForecastLocalDataSource.setDetailedWeatherForecast(
                 mapper.mapToDetailedWeatherForecast(
                     response = response
                 )
             )
         }
-        return weatherForecastLocalDataSource.getDailyWeatherForecastList()
+
+        return Result.success(weatherForecastLocalDataSource.getDailyWeatherForecast())
     }
 }

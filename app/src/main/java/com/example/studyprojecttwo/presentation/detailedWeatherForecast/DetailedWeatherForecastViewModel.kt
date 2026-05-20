@@ -5,8 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.studyprojecttwo.data.WeatherForecastRepository
 import com.example.studyprojecttwo.domain.DetailedWeatherForecast
-import com.example.studyprojecttwo.domain.Precipitation
-import com.example.studyprojecttwo.domain.WeatherInfoAdvanced
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -26,7 +24,7 @@ internal class DetailedWeatherForecastViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             val result = repository.getDetailedWeatherForecast(date)
-            result.onSuccess { value -> _item.value = value }
+            result.onSuccess { value -> _item.emit(value) }
         }
     }
 }

@@ -19,8 +19,8 @@ internal class DailyWeatherForecastViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            val list = repository.getDailyWeatherForecastLis()
-            _items.emit(list ?: emptyList())
+            val result = repository.getDailyWeatherForecast()
+            result.onSuccess { value -> value?.let { _items.emit(it) }}
         }
     }
 }

@@ -90,11 +90,11 @@ internal fun DetailedWeatherForecastScreen(
 }
 
 internal fun Precipitation.getImageId(): Int {
-    when (this.value) {
-        0 -> return R.drawable.sunny
-        1 -> return R.drawable.lightrain
-        2 -> return R.drawable.snow
-        3 -> return R.drawable.cloudy
+    when (this) {
+        Precipitation.SUNNY -> return R.drawable.sunny
+        Precipitation.LIGHT_RAIN -> return R.drawable.lightrain
+        Precipitation.SNOW -> return R.drawable.snow
+        Precipitation.CLOUDY -> return R.drawable.cloudy
         else -> return R.drawable.sunny
     }
 }

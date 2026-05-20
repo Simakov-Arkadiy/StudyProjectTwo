@@ -10,17 +10,17 @@ import jakarta.inject.Inject
 internal class WeatherForecastMapper @Inject constructor() {
 
     fun mapToDailyWeatherForecast(response: WeatherForecastResponse): List<DailyWeatherForecast> {
-        var dailyWeatherForecastList =
-            response.dailyDto.dates.zip(response.dailyDto.averageTemperature)
-                .mapNotNull { (date, temperature) ->
-                    if (date != null && temperature != null) {
-                        DailyWeatherForecast(
-                            date = date,
-                            weatherInfo = WeatherInfoShort(averageTemperature = temperature),
-                        )
-                    } else null
+        return response.dailyDto.dates.zip(response.dailyDto.averageTemperature)
+            .mapNotNull { (date, temperature) ->
+                if (date != null && temperature != null) {
+                    DailyWeatherForecast(
+                        date = date,
+                        weatherInfo = WeatherInfoShort(averageTemperature = temperature),
+                    )
+                } else {
+                    null
                 }
-        return dailyWeatherForecastList
+            }
     }
 
     fun mapToDetailedWeatherForecast(response: WeatherForecastResponse): List<DetailedWeatherForecast> {
@@ -33,25 +33,24 @@ internal class WeatherForecastMapper @Inject constructor() {
                             averageWindSpeed = windSpeed,
                             precipitation = Precipitation.SNOW
                         )
-                    } else null
+                    } else {
+                        null
+                    }
                 }
 
-        val detailedWeatherForecastList =
-            response.hourlyDto.dateTimes.mapIndexedNotNull { index, date ->
-                if (index % 4 == 0) {
-                    DetailedWeatherForecast(
-                        date = date,
-                        morningForecast = weatherInfoAdvancedList.elementAtOrElse(index)
-                        { WeatherInfoAdvanced(0f, 0f, Precipitation.SUNNY) },
-                        dayForecast = weatherInfoAdvancedList.elementAtOrElse(index + 1)
-                        { WeatherInfoAdvanced(0f, 0f, Precipitation.LIGHT_RAIN) },
-                        eveningForecast = weatherInfoAdvancedList.elementAtOrElse(index + 2)
-                        { WeatherInfoAdvanced(0f, 0f, Precipitation.SNOW) },
-                        nightForecast = weatherInfoAdvancedList.elementAtOrElse(index + 3)
-                        { WeatherInfoAdvanced(0f, 0f, Precipitation.CLOUDY) },
-                    )
-                } else null
+
+        return response.hourlyDto.dateTimes.mapIndexedNotNull { index, date ->
+            if (index % 4 == 0) {
+                DetailedWeatherForecast(
+                    date = date,
+                    morningForecast = weatherInfoAdvancedList[index],
+                    dayForecast = weatherInfoAdvancedList[index + 1],
+                    eveningForecast = weatherInfoAdvancedList[index + 2],
+                    nightForecast = weatherInfoAdvancedList[index + 3],
+                )
+            } else {
+                null
             }
-        return detailedWeatherForecastList
+        }
     }
 }
