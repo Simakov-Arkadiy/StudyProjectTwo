@@ -52,13 +52,13 @@ internal fun DailyWeatherForecastItem(
             Text(
                 text = dayFormatterTwo.format(dayFormatter.parse(item.date)),
                 color = Color.White,
-                fontSize = 22.sp
+                fontSize = 22.sp,
             )
         }
         Text(
             text = "${item.weatherInfo.averageTemperature} *C",
             color = Color.White,
-            fontSize = 26.sp
+            fontSize = 26.sp,
         )
     }
 }
