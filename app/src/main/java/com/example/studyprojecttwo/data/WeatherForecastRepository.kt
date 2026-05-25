@@ -5,6 +5,7 @@ import com.example.studyprojecttwo.data.dataSource.WeatherForecastMapper
 import com.example.studyprojecttwo.data.dataSource.WeatherLocalDataSource
 import com.example.studyprojecttwo.domain.DailyWeatherForecast
 import com.example.studyprojecttwo.domain.DetailedWeatherForecast
+import kotlinx.coroutines.sync.Mutex
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -15,10 +16,8 @@ internal class WeatherForecastRepository @Inject constructor(
     var weatherForecastLocalDataSource: WeatherLocalDataSource,
 ) {
     suspend fun getDetailedWeatherForecast(date: String): Result<DetailedWeatherForecast> {
-
         val forecast =
             weatherForecastLocalDataSource.getDetailedWeatherForecast()?.find { item ->
-
                 item.date?.substringBefore("T") == date
             }
         if (forecast != null) {
@@ -42,7 +41,6 @@ internal class WeatherForecastRepository @Inject constructor(
                 )
             )
         }
-
         return Result.success(weatherForecastLocalDataSource.getDailyWeatherForecast())
     }
 }

@@ -6,15 +6,17 @@ import com.example.studyprojecttwo.domain.Precipitation
 import com.example.studyprojecttwo.domain.WeatherInfoAdvanced
 import com.example.studyprojecttwo.domain.WeatherInfoShort
 import jakarta.inject.Inject
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 internal class WeatherForecastMapper @Inject constructor() {
-
+    val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
     fun mapToDailyWeatherForecast(response: WeatherForecastResponse): List<DailyWeatherForecast> {
         return response.dailyDto.dates.zip(response.dailyDto.averageTemperature)
             .mapNotNull { (date, temperature) ->
                 if (date != null && temperature != null) {
                     DailyWeatherForecast(
-                        date = date,
+                        date = format.parse(date),
                         weatherInfo = WeatherInfoShort(averageTemperature = temperature),
                     )
                 } else {
@@ -39,8 +41,8 @@ internal class WeatherForecastMapper @Inject constructor() {
                 }
 
 
-        return response.hourlyDto.dateTimes.mapIndexedNotNull { index, date ->
-            if (index % 4 == 0) {
+        return response.hourlyDto.dateTimes.mapIndexed { index, date ->
+            if (index % 4 == 0 && weatherInfoAdvancedList.size >= (index + 3)) {
                 DetailedWeatherForecast(
                     date = date,
                     morningForecast = weatherInfoAdvancedList[index],
@@ -51,6 +53,6 @@ internal class WeatherForecastMapper @Inject constructor() {
             } else {
                 null
             }
-        }
+        }.filterNotNull()
     }
 }

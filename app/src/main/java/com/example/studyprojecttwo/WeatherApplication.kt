@@ -1,4 +1,4 @@
-package com.example.studyprojecttwo.domain
+package com.example.studyprojecttwo
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
