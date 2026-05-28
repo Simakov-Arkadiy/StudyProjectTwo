@@ -1,12 +1,16 @@
 package com.example.studyprojecttwo.domain
 
-import androidx.compose.runtime.remember
-import java.text.SimpleDateFormat
+import androidx.room3.Embedded
+import androidx.room3.Entity
+import androidx.room3.PrimaryKey
 import java.util.Date
-import java.util.Locale
 
-
+@Entity
 internal data class DailyWeatherForecast(
+    @PrimaryKey
+    val id:Long,
+    @Embedded
     val date: Date,
+    @Embedded
     val weatherInfo: WeatherInfoShort,
 )
