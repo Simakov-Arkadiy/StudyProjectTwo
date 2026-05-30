@@ -2,24 +2,20 @@ package com.example.studyprojecttwo.data
 
 import com.example.studyprojecttwo.data.dataSource.WeatherForecastRemoteDataSource
 import com.example.studyprojecttwo.data.dataSource.WeatherForecastMapper
-import com.example.studyprojecttwo.data.dataSource.WeatherLocalDataSource
+import com.example.studyprojecttwo.data.dataSource.dataBase.WeatherForecastDataBase
 import com.example.studyprojecttwo.domain.DailyWeatherForecast
 import com.example.studyprojecttwo.domain.DetailedWeatherForecast
-import kotlinx.coroutines.sync.Mutex
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 internal class WeatherForecastRepository @Inject constructor(
+    val dataBase: WeatherForecastDataBase,
     val mapper: WeatherForecastMapper,
-    val weatherForecastRemoteDataSource: WeatherForecastRemoteDataSource,
-    var weatherForecastLocalDataSource: WeatherLocalDataSource,
+    val remoteDataSource: WeatherForecastRemoteDataSource,
 ) {
     suspend fun getDetailedWeatherForecast(date: String): Result<DetailedWeatherForecast> {
-        val forecast =
-            weatherForecastLocalDataSource.getDetailedWeatherForecast()?.find { item ->
-                item.date?.substringBefore("T") == date
-            }
+        val forecast = dataBase.detailedWeatherForecastDao().getByDate(date.substringBefore("T"))
         if (forecast != null) {
             return forecast.let { Result.success(it) }
         } else {
@@ -28,19 +24,20 @@ internal class WeatherForecastRepository @Inject constructor(
     }
 
     suspend fun getDailyWeatherForecast(): Result<List<DailyWeatherForecast>?> {
-        val result = Result.runCatching { weatherForecastRemoteDataSource.getWeatherForecast() }
+
+        val result = Result.runCatching { remoteDataSource.getWeatherForecast() }
         result.onSuccess { response ->
-            weatherForecastLocalDataSource.setDailyWeatherForecast(
+            dataBase.dailyWeatherForecastDao().setEntities(
                 mapper.mapToDailyWeatherForecast(
                     response = response
                 )
             )
-            weatherForecastLocalDataSource.setDetailedWeatherForecast(
+            dataBase.detailedWeatherForecastDao().setEntities(
                 mapper.mapToDetailedWeatherForecast(
                     response = response
                 )
             )
         }
-        return Result.success(weatherForecastLocalDataSource.getDailyWeatherForecast())
+        return Result.success(dataBase.dailyWeatherForecastDao().getAll())
     }
 }

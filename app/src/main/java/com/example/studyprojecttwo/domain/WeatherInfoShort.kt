@@ -1,5 +1,7 @@
 package com.example.studyprojecttwo.domain
 
-internal data class WeatherInfoShort(
+import androidx.room.Embedded
+
+data class WeatherInfoShort(
     val averageTemperature: Float,
 )

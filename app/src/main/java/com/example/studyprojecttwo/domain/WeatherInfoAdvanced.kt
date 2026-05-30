@@ -1,6 +1,8 @@
 package com.example.studyprojecttwo.domain
 
-internal data class WeatherInfoAdvanced(
+import androidx.room.Embedded
+
+data class WeatherInfoAdvanced(
     val averageTemperature: Float,
     val averageWindSpeed: Float,
     val precipitation: Precipitation,

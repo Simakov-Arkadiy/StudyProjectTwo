@@ -1,15 +1,14 @@
 package com.example.studyprojecttwo.domain
 
-import androidx.room3.Embedded
-import androidx.room3.Entity
-import androidx.room3.PrimaryKey
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.util.Date
 
 @Entity
-internal data class DailyWeatherForecast(
-    @PrimaryKey
-    val id:Long,
-    @Embedded
+data class DailyWeatherForecast(
+    @PrimaryKey(autoGenerate = true)
+    val id: Long,
     val date: Date,
     @Embedded
     val weatherInfo: WeatherInfoShort,

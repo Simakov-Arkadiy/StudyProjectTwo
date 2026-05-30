@@ -65,8 +65,6 @@ dependencies {
 
     // Hilt
     implementation(libs.com.google.dagger)
-    implementation(libs.androidx.room3.common.jvm)
-    implementation(libs.androidx.room3.runtime)
     ksp(libs.hilt.android.compiler)
     implementation(libs.androidx.hilt)
 
@@ -77,6 +75,7 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
-    implementation(libs.androidx.room.runtime)
-    implementation(libs.androidx.room.ktx)
+    implementation("androidx.room:room-runtime:2.8.4")
+    ksp("androidx.room:room-compiler:2.8.4")
+    implementation("androidx.room:room-ktx:2.8.4")
 }

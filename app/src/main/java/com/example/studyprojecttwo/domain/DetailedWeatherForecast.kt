@@ -1,20 +1,20 @@
 package com.example.studyprojecttwo.domain
 
-import androidx.room3.Embedded
-import androidx.room3.Entity
-import androidx.room3.PrimaryKey
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 @Entity
-internal data class DetailedWeatherForecast(
-    @PrimaryKey
-    val id:Long,
-    val date: String?,
-    @Embedded
+data class DetailedWeatherForecast(
+    @PrimaryKey(autoGenerate = true)
+    val id: Long,
+    val date: String,
+    @Embedded(prefix = "morning")
     val morningForecast: WeatherInfoAdvanced,
-    @Embedded
+    @Embedded(prefix = "day")
     val dayForecast: WeatherInfoAdvanced,
-    @Embedded
+    @Embedded(prefix = "evening")
     val eveningForecast: WeatherInfoAdvanced,
-    @Embedded
+    @Embedded(prefix = "night")
     val nightForecast: WeatherInfoAdvanced,
 )

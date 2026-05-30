@@ -18,6 +18,7 @@ internal class WeatherForecastMapper @Inject constructor() {
                     DailyWeatherForecast(
                         date = format.parse(date),
                         weatherInfo = WeatherInfoShort(averageTemperature = temperature),
+                        id = 0L
                     )
                 } else {
                     null
@@ -49,6 +50,7 @@ internal class WeatherForecastMapper @Inject constructor() {
                     dayForecast = weatherInfoAdvancedList[index + 1],
                     eveningForecast = weatherInfoAdvancedList[index + 2],
                     nightForecast = weatherInfoAdvancedList[index + 3],
+                    id = 0L
                 )
             } else {
                 null
