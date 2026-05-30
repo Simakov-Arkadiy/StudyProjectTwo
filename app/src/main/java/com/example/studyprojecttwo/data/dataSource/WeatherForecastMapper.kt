@@ -45,7 +45,7 @@ internal class WeatherForecastMapper @Inject constructor() {
         return response.hourlyDto.dateTimes.mapIndexed { index, date ->
             if (index % 4 == 0 && weatherInfoAdvancedList.size >= (index + 3)) {
                 DetailedWeatherForecast(
-                    date = date,
+                    date = date.substringBefore("T"),
                     morningForecast = weatherInfoAdvancedList[index],
                     dayForecast = weatherInfoAdvancedList[index + 1],
                     eveningForecast = weatherInfoAdvancedList[index + 2],

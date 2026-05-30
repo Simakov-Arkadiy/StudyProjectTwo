@@ -14,6 +14,6 @@ interface DailyWeatherForecastDao {
     @Insert
     suspend fun setEntities(dailyWeatherForecast: List<DailyWeatherForecast>)
 
-    @Delete
-    suspend fun deleteAll(dailyWeatherForecast: List<DailyWeatherForecast>)
+    @Query("DELETE FROM dailyWeatherForecast")
+    suspend fun deleteAll()
 }

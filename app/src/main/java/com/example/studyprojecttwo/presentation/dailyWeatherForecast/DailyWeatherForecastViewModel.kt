@@ -1,5 +1,6 @@
 package com.example.studyprojecttwo.presentation.dailyWeatherForecast
 
+import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.studyprojecttwo.data.WeatherForecastRepository
@@ -12,6 +13,7 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 internal class DailyWeatherForecastViewModel @Inject constructor(
+    application: Application,
     val repository: WeatherForecastRepository,
 ) : ViewModel() {
     private val _items = MutableStateFlow(listOf<DailyWeatherForecast>())
@@ -19,8 +21,8 @@ internal class DailyWeatherForecastViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            val result = repository.getDailyWeatherForecast()
-            result.onSuccess { value -> value?.let { _items.emit(it) }}
+            val result = repository.getDailyWeatherForecast(application)
+            result.onSuccess { value -> value?.let { _items.emit(it) } }
         }
     }
 }

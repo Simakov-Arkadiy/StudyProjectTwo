@@ -9,11 +9,11 @@ import com.example.studyprojecttwo.domain.DetailedWeatherForecast
 @Dao
 interface DetailedWeatherForecastDao {
     @Query("SELECT DISTINCT * FROM detailedWeatherForecast WHERE date = :date")
-    suspend fun getByDate(date: String): DetailedWeatherForecast
+    suspend fun getByDate(date: String): DetailedWeatherForecast?
 
     @Insert
     suspend fun setEntities(detailedWeatherForecast: List<DetailedWeatherForecast>)
 
-    @Delete
-    suspend fun deleteAll(detailedWeatherForecast: List<DetailedWeatherForecast>)
+    @Query("DELETE FROM detailedWeatherForecast")
+    suspend fun deleteAll()
 }
