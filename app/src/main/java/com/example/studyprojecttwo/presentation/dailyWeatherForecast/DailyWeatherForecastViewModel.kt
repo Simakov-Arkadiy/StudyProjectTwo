@@ -8,7 +8,9 @@ import com.example.studyprojecttwo.domain.DailyWeatherForecast
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 @HiltViewModel
@@ -16,13 +18,16 @@ internal class DailyWeatherForecastViewModel @Inject constructor(
     application: Application,
     val repository: WeatherForecastRepository,
 ) : ViewModel() {
-    private val _items = MutableStateFlow(listOf<DailyWeatherForecast>())
-    val items = _items.asStateFlow()
+    private var _items = MutableStateFlow(listOf<DailyWeatherForecast>())
+    var items = _items.asStateFlow()
 
     init {
         viewModelScope.launch {
-            val result = repository.getDailyWeatherForecast(application)
-            result.onSuccess { value -> value?.let { _items.emit(it) } }
+            items = repository.getDailyWeatherForecast(application).stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5000),
+                initialValue = emptyList()
+            )
         }
     }
 }

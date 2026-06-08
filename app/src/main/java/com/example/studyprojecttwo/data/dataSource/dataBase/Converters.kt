@@ -1,18 +1,17 @@
 package com.example.studyprojecttwo.data.dataSource.dataBase
 
 import androidx.room.TypeConverter
-import com.example.studyprojecttwo.domain.Precipitation
 import java.util.Date
 
 class Converters {
     @TypeConverter
-    fun fromPrecipitation(precipitation: Precipitation): String {
+    fun fromEntityPrecipitation(precipitation: EntityPrecipitation): String {
         return precipitation.name
     }
 
     @TypeConverter
-    fun toPrecipitation(precipitationString: String): Precipitation {
-        return Precipitation.valueOf(precipitationString)
+    fun toEntityPrecipitation(precipitationString: String): EntityPrecipitation {
+        return EntityPrecipitation.valueOf(precipitationString)
     }
 
     @TypeConverter

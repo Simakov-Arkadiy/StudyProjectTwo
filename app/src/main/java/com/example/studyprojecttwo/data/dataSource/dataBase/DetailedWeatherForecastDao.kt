@@ -1,19 +1,18 @@
 package com.example.studyprojecttwo.data.dataSource.dataBase
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import com.example.studyprojecttwo.domain.DetailedWeatherForecast
+import java.util.Date
 
 @Dao
 interface DetailedWeatherForecastDao {
-    @Query("SELECT DISTINCT * FROM detailedWeatherForecast WHERE date = :date")
-    suspend fun getByDate(date: String): DetailedWeatherForecast?
+    @Query("SELECT DISTINCT * FROM entityDetailedWeatherForecast WHERE date = :date")
+    suspend fun getByDate(date: Date): EntityDetailedWeatherForecast?
 
     @Insert
-    suspend fun setEntities(detailedWeatherForecast: List<DetailedWeatherForecast>)
+    suspend fun setEntities(detailedWeatherForecast: List<EntityDetailedWeatherForecast>)
 
-    @Query("DELETE FROM detailedWeatherForecast")
+    @Query("DELETE FROM entityDetailedWeatherForecast")
     suspend fun deleteAll()
 }

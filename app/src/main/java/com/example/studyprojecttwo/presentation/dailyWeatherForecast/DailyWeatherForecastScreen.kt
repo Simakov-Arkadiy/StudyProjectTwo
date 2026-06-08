@@ -22,10 +22,9 @@ internal fun DailyWeatherForecastScreen(
     viewModel: DailyWeatherForecastViewModel = hiltViewModel()
 ) {
     val items by viewModel.items.collectAsState()
-    if(items.size == 0) {
+    if (items.size == 0) {
         Loader()
-    }
-    else{
+    } else {
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(10.dp),
             modifier = Modifier

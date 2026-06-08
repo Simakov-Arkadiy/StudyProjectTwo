@@ -1,37 +1,29 @@
 package com.example.studyprojecttwo.data
 
 import android.app.Application
-import android.content.Context
-import androidx.work.PeriodicWorkRequestBuilder
-import androidx.work.WorkManager
-import androidx.work.WorkRequest
-import com.example.studyprojecttwo.data.dataSource.dataBase.WeatherForecastDataBase
+import com.example.studyprojecttwo.data.dataSource.GetDetailedWeatherForecastUseCase
+import com.example.studyprojecttwo.data.dataSource.ObserveDailyWeatherForecastUseCase
+import com.example.studyprojecttwo.data.dataSource.StartPeriodicUpdateWeatherForecastUseCase
 import com.example.studyprojecttwo.domain.DailyWeatherForecast
 import com.example.studyprojecttwo.domain.DetailedWeatherForecast
-import java.util.concurrent.TimeUnit
+import kotlinx.coroutines.flow.Flow
+import java.util.Date
 import javax.inject.Inject
 import javax.inject.Singleton
 
 
 @Singleton
 internal class WeatherForecastRepository @Inject constructor(
-    val dataBase: WeatherForecastDataBase,
+    val startPeriodicUpdateWeatherForecastUseCase: StartPeriodicUpdateWeatherForecastUseCase,
+    val observeDailyWeatherForecastUseCase: ObserveDailyWeatherForecastUseCase,
+    val getDetailedWeatherForecastUseCase: GetDetailedWeatherForecastUseCase,
 ) {
-    suspend fun getDetailedWeatherForecast(date: String): Result<DetailedWeatherForecast> {
-        val forecast = dataBase.detailedWeatherForecastDao().getByDate(date)
-        if (forecast != null) {
-            return forecast.let { Result.success(it) }
-        } else {
-            return Result.failure(IllegalArgumentException("Прогноз для даты $date не найден"))
-        }
+    suspend fun getDetailedWeatherForecast(date: Date): Result<DetailedWeatherForecast> {
+        return getDetailedWeatherForecastUseCase.invoke(date)
     }
 
-    suspend fun getDailyWeatherForecast(application: Application): Result<List<DailyWeatherForecast>> {
-        val workRequest: WorkRequest =
-            PeriodicWorkRequestBuilder<WeatherForecastWorker>(16, TimeUnit.MINUTES)
-                .build()
-        WorkManager.getInstance(application).enqueue(workRequest)
-        val result = Result.runCatching { dataBase.dailyWeatherForecastDao().getAll() }
-        return result
+    suspend fun getDailyWeatherForecast(application: Application): Flow<List<DailyWeatherForecast>> {
+        startPeriodicUpdateWeatherForecastUseCase.invoke(application)
+        return observeDailyWeatherForecastUseCase.invoke()
     }
 }

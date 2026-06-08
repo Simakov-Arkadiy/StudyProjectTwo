@@ -5,8 +5,6 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.studyprojecttwo.domain.DailyWeatherForecast
-import com.example.studyprojecttwo.domain.DetailedWeatherForecast
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,7 +12,10 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import jakarta.inject.Singleton
 
-@Database(entities = [DailyWeatherForecast::class, DetailedWeatherForecast::class], version = 1)
+@Database(
+    entities = [EntityDailyWeatherForecast::class, EntityDetailedWeatherForecast::class],
+    version = 1
+)
 @TypeConverters(Converters::class)
 abstract class WeatherForecastDataBase : RoomDatabase() {
     abstract fun dailyWeatherForecastDao(): DailyWeatherForecastDao

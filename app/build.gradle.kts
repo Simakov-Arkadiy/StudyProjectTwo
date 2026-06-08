@@ -66,8 +66,9 @@ dependencies {
     // Hilt
     implementation(libs.com.google.dagger)
     ksp(libs.hilt.android.compiler)
+    ksp("androidx.hilt:hilt-compiler:1.3.0")
     implementation(libs.androidx.hilt)
-
+    implementation("androidx.hilt:hilt-work:1.3.0")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

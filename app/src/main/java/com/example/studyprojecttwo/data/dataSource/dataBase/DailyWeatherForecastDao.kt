@@ -1,19 +1,18 @@
 package com.example.studyprojecttwo.data.dataSource.dataBase
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import com.example.studyprojecttwo.domain.DailyWeatherForecast
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface DailyWeatherForecastDao {
-    @Query("SELECT * FROM dailyWeatherForecast")
-    suspend fun getAll(): List<DailyWeatherForecast>
+    @Query("SELECT * FROM entityDailyWeatherForecast")
+    fun getAll(): Flow<List<EntityDailyWeatherForecast>>
 
     @Insert
-    suspend fun setEntities(dailyWeatherForecast: List<DailyWeatherForecast>)
+    suspend fun setEntities(dailyWeatherForecast: List<EntityDailyWeatherForecast>)
 
-    @Query("DELETE FROM dailyWeatherForecast")
+    @Query("DELETE FROM entityDailyWeatherForecast")
     suspend fun deleteAll()
 }
