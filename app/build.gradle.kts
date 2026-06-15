@@ -57,6 +57,9 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.org.jetbrains.kotlinx)
     implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.glance.appwidget)
+    implementation(libs.org.jetbrains.kotlinx.coroutines)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
 
     // Retrofit
     implementation(libs.com.squareup.retrofit2)

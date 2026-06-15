@@ -1,9 +1,8 @@
-package com.example.studyprojecttwo.presentation.dailyWeatherForecast
+package com.example.studyprojecttwo.widget
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.studyprojecttwo.data.WeatherForecastRepository
 import com.example.studyprojecttwo.domain.DailyWeatherForecast
 import com.example.studyprojecttwo.domain.ObserveDailyWeatherForecastUseCase
 import com.example.studyprojecttwo.domain.StartPeriodicUpdateWeatherForecastUseCase
@@ -16,7 +15,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 @HiltViewModel
-internal class DailyWeatherForecastViewModel @Inject constructor(
+internal class WeatherWidgetViewModelViewModel @Inject constructor(
     application: Application,
     val startPeriodicUpdateWeatherForecastUseCase: StartPeriodicUpdateWeatherForecastUseCase,
     val observeDailyWeatherForecastUseCase: ObserveDailyWeatherForecastUseCase,
