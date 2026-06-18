@@ -15,6 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.StudyProjectTwo">
+
         <provider
             android:name="androidx.startup.InitializationProvider"
             android:authorities="${applicationId}.androidx-startup"
@@ -36,7 +37,7 @@
             </intent-filter>
         </activity>
         <receiver
-            android:name=".widget.WeatherWidgetReceiver"
+            android:name=".widget.CurrentWeatherWidgetReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />

@@ -5,7 +5,7 @@ import jakarta.inject.Inject
 import kotlinx.coroutines.flow.Flow
 
 internal class ObserveDailyWeatherForecastUseCase @Inject constructor(
-    val repository: WeatherForecastRepository
+    private val repository: WeatherForecastRepository
 ) {
     suspend fun invoke():Flow<List<DailyWeatherForecast>>{
         return repository.observerDailyWeatherForecast()

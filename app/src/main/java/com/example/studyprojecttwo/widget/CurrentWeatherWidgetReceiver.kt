@@ -3,6 +3,6 @@ package com.example.studyprojecttwo.widget
 import androidx.glance.appwidget.GlanceAppWidget
 import androidx.glance.appwidget.GlanceAppWidgetReceiver
 
-class WeatherWidgetReceiver: GlanceAppWidgetReceiver() {
-    override val glanceAppWidget: GlanceAppWidget = WeatherWidget()
+class CurrentWeatherWidgetReceiver : GlanceAppWidgetReceiver() {
+    override val glanceAppWidget: GlanceAppWidget = CurrentWeatherWidget()
 }

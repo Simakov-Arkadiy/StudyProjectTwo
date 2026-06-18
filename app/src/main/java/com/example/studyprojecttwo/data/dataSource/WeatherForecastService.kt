@@ -5,11 +5,15 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.json.Json
+import okhttp3.ConnectionSpec
 import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.OkHttpClient
+import okhttp3.Protocol
 import retrofit2.Retrofit
 import retrofit2.converter.kotlinx.serialization.asConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
+import java.util.concurrent.TimeUnit
 
 interface WeatherForecastService {
     @GET("forecast")
@@ -29,6 +33,7 @@ interface WeatherForecastService {
 @Module
 @InstallIn(SingletonComponent::class)
 internal object RetrofitClient {
+
     @Provides
     fun getJson(): Json {
         return Json {

@@ -60,6 +60,7 @@ dependencies {
     implementation(libs.androidx.glance.appwidget)
     implementation(libs.org.jetbrains.kotlinx.coroutines)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation("com.google.code.gson:gson:2.10.1")
 
     // Retrofit
     implementation(libs.com.squareup.retrofit2)

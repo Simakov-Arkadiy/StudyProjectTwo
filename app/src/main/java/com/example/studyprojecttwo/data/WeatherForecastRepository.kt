@@ -3,7 +3,6 @@ package com.example.studyprojecttwo.data
 import android.app.Application
 import androidx.room.withTransaction
 import androidx.work.Constraints
-import androidx.work.ExistingWorkPolicy
 import androidx.work.NetworkType
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.PeriodicWorkRequestBuilder
@@ -87,12 +86,15 @@ internal class WeatherForecastRepository @Inject constructor(
         val constraints = Constraints.Builder()
             .setRequiredNetworkType(NetworkType.CONNECTED)
             .build()
-        val workRequest =
+        val oneTimeWorkRequest = OneTimeWorkRequestBuilder<WeatherForecastWorker>()
+            .build()
+        val periodicWorkRequest =
             PeriodicWorkRequestBuilder<WeatherForecastWorker>(20, TimeUnit.MINUTES)
                 .setConstraints(constraints)
                 .build()
+        WorkManager.getInstance(application).enqueue(oneTimeWorkRequest)
         WorkManager.getInstance(application).enqueue(
-            workRequest
+            periodicWorkRequest
         )
     }
 

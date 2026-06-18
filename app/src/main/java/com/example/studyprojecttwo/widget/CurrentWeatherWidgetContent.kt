@@ -8,8 +8,11 @@ import androidx.glance.layout.padding
 import androidx.glance.text.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.glance.GlanceModifier
+import androidx.glance.action.clickable
+import androidx.glance.appwidget.action.actionRunCallback
 import androidx.glance.layout.Row
 import com.example.studyprojecttwo.ui.theme.BackgroundColorForDayTemperatureItem
 import java.text.SimpleDateFormat
@@ -25,9 +28,9 @@ internal fun WeatherWidgetContent(date: Date, averageTemperature: Float) {
         modifier = GlanceModifier
             .fillMaxWidth()
             .height(70.dp)
-            .background(BackgroundColorForDayTemperatureItem, BackgroundColorForDayTemperatureItem)
+            .background(Color(54, 67, 112, 50), BackgroundColorForDayTemperatureItem)
             .padding(16.dp, 10.dp)
-            //.clickable(onClick = {})
+            .clickable(onClick = actionRunCallback<CurrentWeatherAction>())
     ) {
         Column {
             Text(text = dayFormatter.format(date))
