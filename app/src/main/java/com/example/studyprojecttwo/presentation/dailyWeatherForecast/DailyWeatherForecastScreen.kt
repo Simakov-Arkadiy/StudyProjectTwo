@@ -14,7 +14,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import com.example.studyprojecttwo.presentation.dailyWeatherForecast.DailyWeatherForecastLoader.Loader
+import com.example.studyprojecttwo.presentation.dailyWeatherForecast.dailyWeatherForecastLoader.Loader
 
 @Composable
 internal fun DailyWeatherForecastScreen(
@@ -22,10 +22,9 @@ internal fun DailyWeatherForecastScreen(
     viewModel: DailyWeatherForecastViewModel = hiltViewModel()
 ) {
     val items by viewModel.items.collectAsState()
-    if(items.size == 0) {
+    if (items.size == 0) {
         Loader()
-    }
-    else{
+    } else {
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(10.dp),
             modifier = Modifier

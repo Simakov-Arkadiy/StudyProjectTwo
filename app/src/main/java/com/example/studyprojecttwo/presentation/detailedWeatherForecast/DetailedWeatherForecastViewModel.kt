@@ -10,6 +10,8 @@ import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 @HiltViewModel
 internal class DetailedWeatherForecastViewModel @Inject constructor(
@@ -20,10 +22,11 @@ internal class DetailedWeatherForecastViewModel @Inject constructor(
     private val _item = MutableStateFlow<DetailedWeatherForecast?>(null)
     val item = _item.asStateFlow()
     val date: String = savedStateHandle["date"] ?: "2022-07-01"
+    val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
     init {
         viewModelScope.launch {
-            val result = repository.getDetailedWeatherForecast(date)
+            val result = repository.getDetailedWeatherForecast(formatter.parse(date))
             result.onSuccess { value -> _item.emit(value) }
         }
     }

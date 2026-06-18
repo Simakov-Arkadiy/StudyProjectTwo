@@ -1,5 +1,5 @@
 package com.example.studyprojecttwo.domain
 
-internal data class WeatherInfoShort(
+data class WeatherInfoShort(
     val averageTemperature: Float,
 )
