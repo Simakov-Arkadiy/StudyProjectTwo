@@ -27,11 +27,9 @@ internal class DailyWeatherForecastViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             startPeriodicUpdateWeatherForecastUseCase.invoke(application)
-            items = observeDailyWeatherForecastUseCase.invoke().stateIn(
-                scope = viewModelScope,
-                started = SharingStarted.WhileSubscribed(5000),
-                initialValue = emptyList()
-            )
+            observeDailyWeatherForecastUseCase.invoke() .collect { newItems -> // добавили collect
+                _items.value = newItems
+            }
         }
     }
 }
