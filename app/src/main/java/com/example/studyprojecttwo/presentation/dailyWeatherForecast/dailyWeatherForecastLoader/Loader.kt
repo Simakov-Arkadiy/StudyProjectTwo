@@ -1,4 +1,4 @@
-package com.example.studyprojecttwo.presentation.dailyWeatherForecast.DailyWeatherForecastLoader
+package com.example.studyprojecttwo.presentation.dailyWeatherForecast.dailyWeatherForecastLoader
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

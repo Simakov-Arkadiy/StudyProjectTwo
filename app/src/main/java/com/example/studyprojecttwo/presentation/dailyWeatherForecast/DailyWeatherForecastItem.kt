@@ -43,14 +43,14 @@ internal fun DailyWeatherForecastItem(
             .padding(16.dp, 10.dp)
             .clickable(onClick = {
                 controller.navigate(
-                    "DetailedWeatherForecastScreen/${item.date}"
+                    "DetailedWeatherForecastScreen/${dayFormatter.format(item.date)}"
                 )
             })
     ) {
         Column {
-            Text(text = item.date, color = ColorForMinorText, fontSize = 20.sp)
+            Text(text = dayFormatter.format(item.date), color = ColorForMinorText, fontSize = 20.sp)
             Text(
-                text = dayFormatterTwo.format(dayFormatter.parse(item.date)),
+                text = dayFormatterTwo.format(item.date),
                 color = Color.White,
                 fontSize = 22.sp,
             )

@@ -57,6 +57,10 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.org.jetbrains.kotlinx)
     implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.glance.appwidget)
+    implementation(libs.org.jetbrains.kotlinx.coroutines)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation("com.google.code.gson:gson:2.10.1")
 
     // Retrofit
     implementation(libs.com.squareup.retrofit2)
@@ -66,8 +70,9 @@ dependencies {
     // Hilt
     implementation(libs.com.google.dagger)
     ksp(libs.hilt.android.compiler)
+    ksp("androidx.hilt:hilt-compiler:1.3.0")
     implementation(libs.androidx.hilt)
-
+    implementation("androidx.hilt:hilt-work:1.3.0")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -75,4 +80,13 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
+
+    //Work
+    implementation(libs.androidx.work)
+    implementation(libs.androidx.work.ktx)
+
+    //Room
+    implementation(libs.androidx.room)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
 }
